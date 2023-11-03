@@ -193,9 +193,16 @@ const config = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+
+
+  // I DONT KNOW WHAT THIS IS
+  "transform": {
+    "^.+\\.[t|j]sx?$": "babel-jest"
+  }
 };
 
 module.exports = config;
+// I DONT KNOW WHAT THIS IS 
 
 // Comment the below out if running into problems with Jest and webpack:
 
