@@ -12,7 +12,7 @@ class Gameboard {
         for (let i = 0; i < 10; i++) {
             const row = [];
             for (let j = 0; j < 10; j++) {
-                const node = {};
+                const node = { isEmpty: true };
                 row.push(node);
             }
             graph.push(row);
@@ -21,12 +21,23 @@ class Gameboard {
         return graph;
     }
 
-    placeShip(...coordinates) {
+    placeShip(coordinates) {
         // get the number of the coordinates passed in, assign to length variable
         // create a new ship on the board with length from above
-        // where to store the coordinates? in a graph?
 
-        const newShip = new Ship(2);
+        const x = coordinates[0];
+        const y = coordinates[1];
+
+        const node = this.graph[x][y];
+        console.log(node);
+
+        if (node.isEmpty) {
+            const newShip = new Ship(1);
+            newShip.coordinates = [x, y];
+            node.isEmpty = false;
+        }
+
+        return node;
     }
 
     receiveAttack(coordinates) {
