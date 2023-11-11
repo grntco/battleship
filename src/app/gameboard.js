@@ -60,6 +60,12 @@ class Gameboard {
         // if no, a ship is there
         // find that ship
         // hit that ship once
+
+        const [x, y] = coordinates;
+        const node = this.graph[x][y];
+        if (node.isEmpty) {
+            this.missedShots.push([x, y]);
+        }
     }
 
     areAllShipsSunk() {
