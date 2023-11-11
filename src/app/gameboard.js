@@ -4,6 +4,7 @@ class Gameboard {
     constructor() {
         this.graph = this._createGraph();
         this.missedShots = [];
+        this.ships = []; // maybe...
     }
 
     _createGraph() {
@@ -21,23 +22,29 @@ class Gameboard {
         return graph;
     }
 
-    placeShip(coordinates) {
-        // get the number of the coordinates passed in, assign to length variable
-        // create a new ship on the board with length from above
+    // _isInBounds(coordinates) {
+    //     const [x, y] = coordinates;
+    //     return (x >= 0 || x < 10) || (y >= 0 || y < 10);
+    // }
 
-        const x = coordinates[0];
-        const y = coordinates[1];
+    placeShip(...coordinates) {
+        const shipLength = coordinates.length;
+        const newShip = new Ship(shipLength);
 
-        const node = this.graph[x][y];
-        console.log(node);
+        coordinates.forEach(pair => {
+            const [x, y] = pair;
+            const node = this.graph[x][y];
 
-        if (node.isEmpty) {
-            const newShip = new Ship(1);
-            newShip.coordinates = [x, y];
-            node.isEmpty = false;
-        }
-
-        return node;
+            if (node.isEmpty) {
+                node.isEmpty = false;
+                newShip.coordinates.push([x, y]);
+            }
+        });
+        // might not need this below;
+        // could each gameboard have a list of ships already not created on game start,
+        // and then go through them? 
+        // or would that be in the game?
+        this.ships.push(newShip);
     }
 
     receiveAttack(coordinates) {
@@ -52,6 +59,8 @@ class Gameboard {
     areAllShipsSunk() {
         // are all the nodes empty? 
     }
+
+
 }
 
 export { Gameboard };
