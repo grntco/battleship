@@ -46,11 +46,15 @@ describe('Gameboard', () => {
         expect(testGameboard.graph[0][2]).toEqual({ isEmpty: false });
     });
 
+    it('placeShip with invalid coordinates throws an error', () => {
+        expect(() => testGameboard.placeShip([-1, 10])).toThrowError('Please provide accurate coordinates.');
+    });
+
     // maybe...
     it('placeShip creates a new ship in the gameboard.ships property', () => {
         testGameboard.placeShip([0, 0], [1, 0]);
         expect(testGameboard.ships.length).toBe(1);
     });
 
-    // it('')
+
 });

@@ -24,10 +24,16 @@ class Gameboard {
 
     _isInBounds(coordinates) {
         const [x, y] = coordinates;
-        return (x >= 0 || x < 10) || (y >= 0 || y < 10);
+        return (x >= 0 && x < 10) || (y >= 0 && y < 10); 
     }
 
     placeShip(...coordinates) {
+        coordinates.forEach(pair => {
+            if (!this._isInBounds(pair)) {
+                throw new Error('Please provide accurate coordinates.');
+            }
+        });
+
         const shipLength = coordinates.length;
         const newShip = new Ship(shipLength);
 
