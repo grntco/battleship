@@ -22,11 +22,6 @@ class Gameboard {
         return graph;
     }
 
-    _isInBounds(coordinates) {
-        const [x, y] = coordinates;
-        return (x >= 0 && x < 10) || (y >= 0 && y < 10); 
-    }
-
     placeShip(...coordinates) {
         coordinates.forEach(pair => {
             if (!this._isInBounds(pair)) {
@@ -78,6 +73,10 @@ class Gameboard {
         // are all the nodes empty? 
     }
 
+    _isInBounds(coordinates) {
+        const [x, y] = coordinates;
+        return (x >= 0 && x < 10) || (y >= 0 && y < 10); 
+    }
 
     _findShipFromCoordinates(coordinates) {
         return this.ships.find(ship => 
