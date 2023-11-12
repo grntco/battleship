@@ -61,7 +61,7 @@ describe('Gameboard', () => {
 
     // receiveAttack()
 
-    it.only('receiveAttack increments the hitCount of a specific ship', () => {
+    it('receiveAttack increments the hitCount of a specific ship', () => {
         testGameboard.placeShip([0, 0], [0, 1], [0, 2]);
         testGameboard.receiveAttack([0, 0]);
         expect(testGameboard.ships[0].hitCount).toBe(1);
@@ -69,10 +69,18 @@ describe('Gameboard', () => {
         expect(testGameboard.ships[0].hitCount).toBe(2);
     });
 
+    it('receiveAttack pushes the coordinates of a hit shot into main list of hit shots', () => {
+        testGameboard.placeShip([0, 0], [0, 1], [0, 2]);
+        testGameboard.receiveAttack([0, 0]);
+        expect(testGameboard.hitShots).toContainEqual([0, 0]);
+    });
+
     it('receiveAttack pushes the coordinates a missed shot if no ship present', () => {
         testGameboard.placeShip([0, 0], [0, 1], [0, 2]);
         testGameboard.receiveAttack([0, 3]);
         expect(testGameboard.missedShots).toContainEqual([0, 3]);
     });
+
+
 
 });

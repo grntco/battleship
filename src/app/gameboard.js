@@ -4,22 +4,8 @@ class Gameboard {
     constructor() {
         this.graph = this._createGraph();
         this.missedShots = [];
+        this.hitShots = [];
         this.ships = []; // maybe...
-    }
-
-    _createGraph() {
-        const graph = [];
-
-        for (let i = 0; i < 10; i++) {
-            const row = [];
-            for (let j = 0; j < 10; j++) {
-                const node = { isEmpty: true };
-                row.push(node);
-            }
-            graph.push(row);
-        }
-
-        return graph;
     }
 
     placeShip(...coordinates) {
@@ -49,16 +35,6 @@ class Gameboard {
     }
 
     receiveAttack(coordinates) {
-        // are those coordinates empty?
-        // if yes, no ship is there
-        // record coordinates of the missed shot in a list (above?)
-        // if no, a ship is there
-        // find that ship
-        // hit that ship once
-
-
-
-
         const [x, y] = coordinates;
         const node = this.graph[x][y];
         if (node.isEmpty) {
@@ -66,11 +42,27 @@ class Gameboard {
         } else {
             const targetShip = this._findShipFromCoordinates(coordinates);
             targetShip.hit();
+            this.hitShots.push(coordinates);
         }
     }
 
     areAllShipsSunk() {
         // are all the nodes empty? 
+    }
+
+    _createGraph() {
+        const graph = [];
+
+        for (let i = 0; i < 10; i++) {
+            const row = [];
+            for (let j = 0; j < 10; j++) {
+                const node = { isEmpty: true };
+                row.push(node);
+            }
+            graph.push(row);
+        }
+
+        return graph;
     }
 
     _isInBounds(coordinates) {
@@ -85,7 +77,6 @@ class Gameboard {
             )
         ));
     }
-
 }
 
 export { Gameboard };
