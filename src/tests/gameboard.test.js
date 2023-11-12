@@ -6,7 +6,9 @@ jest.mock("../app/ship", () => ({
         length,
         hitCount: 0,
         coordinates: [],
-        hit: jest.fn(),
+        hit: jest.fn(function() {
+            this.hitCount++;
+        }),
         isSunk: jest.fn(() => false),
     })),
 }));
@@ -59,13 +61,15 @@ describe('Gameboard', () => {
 
     // receiveAttack()
 
-    it('receiveAttack increments the hitCount of a specific ship', () => {
+    it.only('receiveAttack increments the hitCount of a specific ship', () => {
         testGameboard.placeShip([0, 0], [0, 1], [0, 2]);
         testGameboard.receiveAttack([0, 0]);
         expect(testGameboard.ships[0].hitCount).toBe(1);
+        testGameboard.receiveAttack([0, 1]);
+        expect(testGameboard.ships[0].hitCount).toBe(2);
     });
 
-    it.only('receiveAttack pushes the coordinates a missed shot if no ship present', () => {
+    it('receiveAttack pushes the coordinates a missed shot if no ship present', () => {
         testGameboard.placeShip([0, 0], [0, 1], [0, 2]);
         testGameboard.receiveAttack([0, 3]);
         expect(testGameboard.missedShots).toContainEqual([0, 3]);

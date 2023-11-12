@@ -61,10 +61,16 @@ class Gameboard {
         // find that ship
         // hit that ship once
 
+
+
+
         const [x, y] = coordinates;
         const node = this.graph[x][y];
         if (node.isEmpty) {
-            this.missedShots.push([x, y]);
+            this.missedShots.push(coordinates);
+        } else {
+            const targetShip = this._findShipFromCoordinates(coordinates);
+            targetShip.hit();
         }
     }
 
@@ -72,6 +78,14 @@ class Gameboard {
         // are all the nodes empty? 
     }
 
+
+    _findShipFromCoordinates(coordinates) {
+        return this.ships.find(ship => 
+            ship.coordinates.some(pair => pair.every((value, index) => 
+                value === coordinates[index]
+            )
+        ));
+    }
 
 }
 
