@@ -9,7 +9,9 @@ jest.mock("../app/ship", () => ({
         hit: jest.fn(function() {
             this.hitCount++;
         }),
-        isSunk: jest.fn(() => false),
+        isSunk: jest.fn(function() {
+            return this.hitCount >= this.length;
+        }),
     })),
 }));
 
@@ -82,5 +84,22 @@ describe('Gameboard', () => {
     });
 
 
+    // allShipsSunk()
+
+    it('allShipsSunk returns true when all ships on the gameboard are sunk', () => {
+        testGameboard.placeShip([0, 0], [0, 1]);
+        testGameboard.receiveAttack([0, 0]);
+        testGameboard.receiveAttack([0, 1]);
+        expect(testGameboard.allShipsSunk()).toBeTruthy();
+    });
+
+    it('allShipsSunk returns false if a ship is not yet sunk', () => {
+        testGameboard.placeShip([0, 0], [0, 1]); // first ship of length 2
+        testGameboard.placeShip([9, 9]); // second ship of length 1
+        testGameboard.receiveAttack([0, 0]);
+        testGameboard.receiveAttack([0, 1]); // sinks the first ship
+        expect(testGameboard.ships[0].isSunk()).toBeTruthy(); // true; first ship is sunk
+        expect(testGameboard.allShipsSunk()).toBeFalsy(); // false; not all ships are sunk
+    });
 
 });

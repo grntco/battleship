@@ -46,8 +46,8 @@ class Gameboard {
         }
     }
 
-    areAllShipsSunk() {
-        // are all the nodes empty? 
+    allShipsSunk() {
+        return this.ships.every(ship => ship.isSunk());       
     }
 
     _createGraph() {
