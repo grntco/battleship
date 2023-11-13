@@ -8,10 +8,6 @@ class Player {
     attack(enemyGameboard, coordinates) {
         enemyGameboard.receiveAttack(coordinates);
     }
-
-    getRandomCoordinates(enemyGameboard) {
-
-    }
 }
 
 export { Player };

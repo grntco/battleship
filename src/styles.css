@@ -1,3 +1,21 @@
-.hello-world {
-  color: blueviolet;
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+/* Colors from Chris Yeh: https://chrisyeh96.github.io/2020/03/28/terminal-colors.html */
+:root {
+  --black: rgb(0, 0, 0);
+  --red: rgb(204, 0, 0);
+  --green:rgb(78, 154, 6);
+  --yellow:	rgb(196, 160, 0);
+  --blue: rgb(114, 159, 207);
+  --white:rgb(211, 215, 207);
+  --bright-black: rgb(85, 87, 83);
+  --bright-red:	rgb(239, 41, 41);
+  --bright-green: rgb(138, 226, 52);
+  --bright-yellow: rgb(252, 233, 79);
+  --bright-blue: rgb(50, 175, 255);
+  --bright-white: rgb(255, 255, 255);
 }
