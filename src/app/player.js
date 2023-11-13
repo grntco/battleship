@@ -4,8 +4,13 @@ class Player {
         this.turn = false;
     }
 
+    // maybe...
     attack(enemyGameboard, coordinates) {
         enemyGameboard.receiveAttack(coordinates);
+    }
+
+    getRandomCoordinates(enemyGameboard) {
+
     }
 }
 

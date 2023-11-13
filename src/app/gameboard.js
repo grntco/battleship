@@ -40,7 +40,7 @@ class Gameboard {
         if (node.isEmpty) {
             this.missedShots.push(coordinates);
         } else {
-            const targetShip = this._findShipFromCoordinates(coordinates);
+            const targetShip = this._getShipFromCoordinates(coordinates);
             targetShip.hit();
             this.hitShots.push(coordinates);
         }
@@ -48,6 +48,16 @@ class Gameboard {
 
     allShipsSunk() {
         return this.ships.every(ship => ship.isSunk());       
+    }
+
+    getRandomCoordinates() {
+        let x = Math.floor(Math.random() * 10);
+        let y = Math.floor(Math.random() * 10);
+        if (this._areCoodinatesInArray([x, y], this.missedShots)
+        || this._areCoodinatesInArray([x, y], this.hitShots)) {
+            this.getRandomCoordinates();
+        }
+        return [x, y];
     }
 
     _createGraph() {
@@ -70,11 +80,15 @@ class Gameboard {
         return (x >= 0 && x < 10) || (y >= 0 && y < 10); 
     }
 
-    _findShipFromCoordinates(coordinates) {
+    _getShipFromCoordinates(coordinates) {
         return this.ships.find(ship => 
-            ship.coordinates.some(pair => pair.every((value, index) => 
-                value === coordinates[index]
-            )
+            this._areCoodinatesInArray(coordinates, ship.coordinates)
+        );
+    }
+
+    _areCoodinatesInArray(coordinates, array) {
+        return array.some(pair => pair.every((value, index) => 
+            value === coordinates[index]
         ));
     }
 }

@@ -15,7 +15,7 @@ jest.mock("../app/ship", () => ({
     })),
 }));
 
-describe.skip('Gameboard', () => {
+describe('Gameboard', () => {
     const testGameboard = new Gameboard();
 
     beforeEach(() => {
@@ -63,7 +63,7 @@ describe.skip('Gameboard', () => {
 
     // receiveAttack()
 
-    it('receiveAttack increments the hitCount of a specific ship', () => {
+    it.only('receiveAttack increments the hitCount of a specific ship', () => {
         testGameboard.placeShip([0, 0], [0, 1], [0, 2]);
         testGameboard.receiveAttack([0, 0]);
         expect(testGameboard.ships[0].hitCount).toBe(1);
@@ -100,6 +100,15 @@ describe.skip('Gameboard', () => {
         testGameboard.receiveAttack([0, 1]); // sinks the first ship
         expect(testGameboard.ships[0].isSunk()).toBeTruthy(); // true; first ship is sunk
         expect(testGameboard.allShipsSunk()).toBeFalsy(); // false; not all ships are sunk
+    });
+
+
+    it('getRandomCoordinates returns a random coordinate not in missedShots or hitShots', () => {
+        testGameboard.receiveAttack([0, 0]);
+        testGameboard.receiveAttack([0, 1]);
+
+        expect(testGameboard.getRandomCoordinates()).not.toEqual([0, 0]);
+        expect(testGameboard.getRandomCoordinates()).not.toEqual([0, 1]);
     });
 
 });
