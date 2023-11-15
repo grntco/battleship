@@ -47,7 +47,9 @@
 
 /* Styles */
 
-h1 {
+body {
+  background-color: var(--black);
+  color: var(--bright-green);
   font-family: 'JetBrains Mono';
-  font-weight: 900;
+  font-weight: 400;
 }
