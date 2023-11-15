@@ -1,8 +1,4 @@
 import "./styles.css";
+import { mainContainer } from "./ui/mainContainer";
 
-const helloWorld = document.createElement("h1");
-helloWorld.textContent = "Hello, world!";
-helloWorld.className = "hello-world";
-document.body.appendChild(helloWorld);
-
-console.log("hello");
+document.body.appendChild(mainContainer);
