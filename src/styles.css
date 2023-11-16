@@ -53,3 +53,22 @@ body {
   font-family: 'JetBrains Mono';
   font-weight: 400;
 }
+
+.nav {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid var(--bright-green);
+}
+
+.nav__game-title {
+  text-transform: uppercase;
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 0.5rem;
+}
+
+.main-container {
+  border: 1px solid red;
+}
+
