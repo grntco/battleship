@@ -1,9 +1,32 @@
 const gameContainer = document.createElement('div');
 gameContainer.className = 'game-container';
 
-const gridContainer = document.createElement('div');
-gridContainer.className = 'grid-container';
-gameContainer.appendChild(gridContainer);
+const createGridContainer = function() {
+    const gridContainer = document.createElement('div');
+    gridContainer.className = 'grid-container';
+
+    const createGrid = function() {
+        const grid = document.createElement('div');
+        grid.className = 'grid';
+
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                const gridItem = grid.appendChild(document.createElement('div'));
+                gridItem.className = 'grid-item';
+            }
+        }
+
+        return grid;
+    };
+
+    gridContainer.appendChild(createGrid());
+    return gridContainer;
+};
+
+gameContainer.appendChild(createGridContainer());
+gameContainer.appendChild(createGridContainer());
+
+export { gameContainer };
 
 
 
@@ -36,12 +59,3 @@ gameContainer.appendChild(gridContainer);
 //     // createGrid()
 // }
 
-gameContainer.appendChild(createGridContainer());
-gameContainer.appendChild(createGridContainer());
-
-
-
-
-
-
-export { gameContainer };
