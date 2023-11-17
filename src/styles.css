@@ -91,7 +91,29 @@ body {
 }
 
 .grid-container {
+  display: grid;
+  grid-template-columns: 1fr, 322px;
+  /* width: min-content; */
+  /* please delete this width if you can */
+}
 
+.grid-container__x-axis-container {
+  grid-column: 2 / 3;
+  display: grid;
+  grid-template-columns: repeat(10, 32px);
+}
+
+.grid-container__y-axis-container {
+  display: grid;
+  grid-template-rows: repeat(10, 32px);
+}
+
+.grid-container__x-axis__letter, 
+.grid-container__y-axis__letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
 }
 
 .grid {

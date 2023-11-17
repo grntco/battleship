@@ -4,25 +4,41 @@ gameContainer.className = 'game-container';
 const createGridContainer = function() {
     const gridContainer = document.createElement('div');
     gridContainer.className = 'grid-container';
+        
+    const createXAxisContainer = function() {
+        const xAxisContainer = document.createElement('div');
+        xAxisContainer.className = 'grid-container__x-axis-container';
 
+        const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+        letters.forEach(letterItem => {
+            const xAxisLetter = xAxisContainer.appendChild(document.createElement('div'));
+            xAxisLetter.className = 'grid-container__x-axis__letter';
+            xAxisLetter.textContent = letterItem;
+        });
+
+        return xAxisContainer;
+    };
+
+    const createYAxisContainer = function() {
+        const yAxisContainer = document.createElement('div');
+        yAxisContainer.className = 'grid-container__y-axis-container';
+
+        const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+        numbers.forEach(numberItem => {
+            const yAxisNumber = yAxisContainer.appendChild(document.createElement('div'));
+            yAxisNumber.className = 'grid-container__y-axis__letter';
+            yAxisNumber.textContent = numberItem;
+        });
+
+        return yAxisContainer;
+    };
+    
     const grid = document.createElement('div');
     grid.className = 'grid';
     grid.classList.add('player-grid');
 
-    // const createGrid = function() {
-    //     const grid = document.createElement('div');
-    //     grid.className = 'grid';
-
-    //     for (let i = 0; i < 10; i++) {
-    //         for (let j = 0; j < 10; j++) {
-    //             const gridItem = grid.appendChild(document.createElement('div'));
-    //             gridItem.className = 'grid-item';
-    //         }
-    //     }
-
-    //     return grid;
-    // };
-
+    gridContainer.appendChild(createXAxisContainer());
+    gridContainer.appendChild(createYAxisContainer());
     gridContainer.appendChild(grid);
     return gridContainer;
 };
