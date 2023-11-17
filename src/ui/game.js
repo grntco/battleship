@@ -5,57 +5,63 @@ const createGridContainer = function() {
     const gridContainer = document.createElement('div');
     gridContainer.className = 'grid-container';
 
-    const createGrid = function() {
-        const grid = document.createElement('div');
-        grid.className = 'grid';
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+    grid.classList.add('player-grid');
 
-        for (let i = 0; i < 10; i++) {
-            for (let j = 0; j < 10; j++) {
-                const gridItem = grid.appendChild(document.createElement('div'));
-                gridItem.className = 'grid-item';
-            }
-        }
+    // const createGrid = function() {
+    //     const grid = document.createElement('div');
+    //     grid.className = 'grid';
 
-        return grid;
-    };
+    //     for (let i = 0; i < 10; i++) {
+    //         for (let j = 0; j < 10; j++) {
+    //             const gridItem = grid.appendChild(document.createElement('div'));
+    //             gridItem.className = 'grid-item';
+    //         }
+    //     }
 
-    gridContainer.appendChild(createGrid());
+    //     return grid;
+    // };
+
+    gridContainer.appendChild(grid);
     return gridContainer;
 };
 
 gameContainer.appendChild(createGridContainer());
-gameContainer.appendChild(createGridContainer());
+// gameContainer.appendChild(createGridContainer());
 
-export { gameContainer };
+function refreshGrid(gameboard) {
+    // const ships = playerGameboard.ships;
+    const grid = document.querySelector('.player-grid');
+    grid.innerHTML = '';
+
+    const board = gameboard.graph;
+
+    for (let i = board.length - 1; i >= 0; i--) { // reverse to get ships in right order
+        for (let j = 0; j < board[i].length; j++) {
+            const node = board[i][j];
+            const gridItem = grid.appendChild(document.createElement('div'));
+            gridItem.className = 'grid-item';
+            if (!node.isEmpty) {
+                gridItem.classList.add('grid-ship');
+            }
+        }
+    }
 
 
+    // board.forEach(row => {
+    //     row.forEach(node => {
+    //         const gridItem = grid.appendChild(document.createElement('div'));
+    //         gridItem.className = 'grid-item';
+    //         if (!node.isEmpty) {
+    //             gridItem.classList.add('grid-ship');
+    //         }
+    //     });
+    // });
 
-// const createGrid = function(gameboardObj) {
-//     const grid = document.createElement('div');
-//     grid.className = 'grid';
-//     // grid.classList.add(`grid-${gameboardObj.player?}`)
 
-//     gameboardObj.graph.forEach(row => {
-//         row.forEach(node => {
-//             const gridItem = document.createElement('div');
-//             gridItem.className = 'grid-item';
-//             grid.appendChild(gridItem);
+    return grid;
+}
 
-//             // if (!node.isEmpty) {
-
-//             // }
-//         });
-//     });
-// };
-
-// const removeGrid = function(gameboardObj) {
-
-// }
-
-// const refreshGrid = function(gameboardObj) {
-//     const grid = document.querySelector('.grid');
-
-//     // removeGrid()
-//     // createGrid()
-// }
+export { gameContainer, refreshGrid };
 

@@ -107,8 +107,12 @@ body {
 }
 
 .grid-item:hover {
-  background-color: var(--green);
+  background-color: var(--bright-black);
   cursor: crosshair;
+}
+
+.grid-ship {
+  background-color: var(--green);
 }
 
 .footer {
