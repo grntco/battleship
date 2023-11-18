@@ -1,12 +1,11 @@
 import { Game } from "../app/game";
-import { refreshGrid } from "./game";
+import { refreshGrid } from "./grid";
 
 const DOMController = function() {
 
     const newGame = new Game();
     newGame.createAllShips();
-    refreshGrid(newGame.humanGameboard);
-    // refreshGrid(newGame.computerGameboard);
+    refreshGrid(newGame.humanPlayer, newGame.humanGameboard);
 };
 
 export { DOMController };

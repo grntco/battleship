@@ -108,12 +108,12 @@ body {
   grid-template-rows: repeat(10, 32px);
 }
 
-.grid-container__x-axis__letter, 
-.grid-container__y-axis__letter {
+.grid-container__axis-item {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 4px;
+  font-size: 0.8rem;
 }
 
 .grid {
