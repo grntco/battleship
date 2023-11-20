@@ -10,6 +10,7 @@ const createStartGameForm = function() {
     nameInput.placeholder = 'Enter your name';
 
     const startGameBtn = form.appendChild(document.createElement('button'));
+    startGameBtn.textContent = 'Start Game';
     startGameBtn.className = 'start-game__btn';
     startGameBtn.id = 'start-game__btn';
     startGameBtn.type = 'submit';
