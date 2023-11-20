@@ -1,11 +1,32 @@
 import { Game } from "../app/game";
-import { refreshGrid } from "./grid";
+import { createGrid } from "./grid";
 
-const DOMController = function() {
+const DOMController = {
+    newGame: new Game(),
 
-    const newGame = new Game();
-    newGame.createAllShips();
-    refreshGrid(newGame.humanPlayer, newGame.humanGameboard);
+    _clearContent: function() {
+        const contentSection = document.querySelector('.content-section');
+        contentSection.innerHTML = '';
+    },
+
+    updateContent: function(newContentFunc) {
+        const contentSection = document.querySelector('.content-section');
+        this._clearContent();
+        contentSection.appendChild(newContentFunc);        
+    },
+
+    refreshGrids: function() {
+        const gridContainers = document.querySelectorAll('.grid-container');
+        const gameboards = [this.newGame.playerGameboard, this.newGame.computerGameboard];
+
+        for (let i = 0; i < 2; i++) {
+            const container = gridContainers[i];
+            const gameboard = gameboards[i];
+            const grid = container.querySelector('.grid');
+            container.removeChild(grid);
+            container.appendChild(createGrid(gameboard));
+        }
+    }
 };
 
 export { DOMController };

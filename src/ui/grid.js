@@ -1,10 +1,8 @@
-function createGrid(player, gameboard) { // createGridItems?
-    // const ships = playerGameboard.ships;
+function createGrid(gameboard) { // createGridItems?
     const grid = document.createElement('div');
     grid.className = 'grid';
 
     if (gameboard) {
-        grid.classList.add(`${player.name === 'Computer' ? 'computer' : 'player'}-grid`);
         const board = gameboard.graph;
         for (let i = board.length - 1; i >= 0; i--) { // reverse to get ships in right order
             for (let j = 0; j < board[i].length; j++) {
@@ -28,21 +26,15 @@ function createGrid(player, gameboard) { // createGridItems?
     return grid;
 }
 
-function _removeGridItems(player) {
-    const grid = document.querySelector(`.${player.name === 'Computer' ? 'computer' : 'player'}-grid`); // but the specific gameboard
-    grid.innerHTML = '';
-}
+// function _removeGridItems(player) {
+//     const grid = document.querySelector(`.${player.name === 'Computer' ? 'computer' : 'player'}-grid`); // but the specific gameboard
+//     grid.innerHTML = '';
+// }
 
-function refreshGrid(player, gameboard) {
-    _removeGridItems(player);
-    createGrid(player, gameboard);
-    console.log('getting called?');
-}
+// function refreshGrid(player, gameboard) {
+//     _removeGridItems(player);
+//     createGrid(gameboard);
+//     console.log('getting called?');
+// }
 
-function refreshBothGrids() {
-    const grids = document.querySelectorAll('.grid');
-
-
-}
-
-export { createGrid, refreshGrid };
+export { createGrid };

@@ -78,6 +78,7 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 /* Start Page */
@@ -145,8 +146,6 @@ body {
 .grid-container {
   display: grid;
   grid-template-columns: 1fr, 322px;
-  /* width: min-content; */
-  /* please delete this width if you can */
 }
 
 .grid-container__x-axis-container {
