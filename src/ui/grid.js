@@ -1,11 +1,9 @@
-function createGrid(player, gameboard) {
+function createGrid(player, gameboard) { // createGridItems?
     // const ships = playerGameboard.ships;
     const grid = document.createElement('div');
     grid.className = 'grid';
-    grid.innerHTML = '';
 
-    
-    if (player && gameboard) {
+    if (gameboard) {
         grid.classList.add(`${player.name === 'Computer' ? 'computer' : 'player'}-grid`);
         const board = gameboard.graph;
         for (let i = board.length - 1; i >= 0; i--) { // reverse to get ships in right order
@@ -39,6 +37,12 @@ function refreshGrid(player, gameboard) {
     _removeGridItems(player);
     createGrid(player, gameboard);
     console.log('getting called?');
+}
+
+function refreshBothGrids() {
+    const grids = document.querySelectorAll('.grid');
+
+
 }
 
 export { createGrid, refreshGrid };

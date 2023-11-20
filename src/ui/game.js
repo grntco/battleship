@@ -3,7 +3,7 @@ import { createGrid } from "./grid";
 const gameContainer = document.createElement('div');
 gameContainer.className = 'game-container';
 
-const createGridContainer = function() {
+const createGridContainer = function(player, gameboard) {
     const gridContainer = document.createElement('div');
     gridContainer.className = 'grid-container';
         
@@ -29,12 +29,13 @@ const createGridContainer = function() {
 
     gridContainer.appendChild(createAxis('x'));
     gridContainer.appendChild(createAxis('y'));
-    gridContainer.appendChild(createGrid());
+    gridContainer.appendChild(createGrid(player));
+
     return gridContainer;
 };
 
-gameContainer.appendChild(createGridContainer());
-gameContainer.appendChild(createGridContainer());
+gameContainer.appendChild(createGridContainer({ name: 'Human' }));
+gameContainer.appendChild(createGridContainer({ name: 'Computer' }));
 // gameContainer.appendChild(createGridContainer());
 
 export { gameContainer };
