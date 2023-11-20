@@ -26,15 +26,4 @@ function createGrid(gameboard) { // createGridItems?
     return grid;
 }
 
-// function _removeGridItems(player) {
-//     const grid = document.querySelector(`.${player.name === 'Computer' ? 'computer' : 'player'}-grid`); // but the specific gameboard
-//     grid.innerHTML = '';
-// }
-
-// function refreshGrid(player, gameboard) {
-//     _removeGridItems(player);
-//     createGrid(gameboard);
-//     console.log('getting called?');
-// }
-
 export { createGrid };
