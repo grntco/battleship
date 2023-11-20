@@ -14,8 +14,8 @@ const createWelcomeContainer = function() {
 
     const startGameBtn = welcomeContainer.appendChild(document.createElement('button'));
     startGameBtn.textContent = 'Start Game';
-    startGameBtn.className = 'start-game__btn';
-    startGameBtn.id = 'start-game__btn';
+    startGameBtn.className = 'start-game-btn';
+    startGameBtn.id = 'start-game-btn';
 
     return welcomeContainer;
 };

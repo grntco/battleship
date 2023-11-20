@@ -45,7 +45,7 @@ const createGameSetupContainer = function() {
             shipContainer.className = 'ship-setup__ship-container';
             
             const rotateBtn = shipSetupContainer.appendChild(document.createElement('button'));
-            rotateBtn.className = 'rotate-btn';
+            rotateBtn.className = 'ship-setup__rotate-btn';
             rotateBtn.id = 'rotate-btn';
             rotateBtn.textContent = 'Rotate';
 
