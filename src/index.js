@@ -1,7 +1,7 @@
 import "./styles.css";
-import { mainContainer } from "./ui/mainContainer";
+import { createMainContainer } from "./ui/mainContainer";
 import { DOMController } from "./ui/DOMcontroller";
 
 
-document.body.appendChild(mainContainer);
+document.body.appendChild(createMainContainer());
 DOMController();
