@@ -5,6 +5,10 @@ const createStartGameForm = function() {
     const form = document.createElement('form');
     form.className = 'start-game__form';
 
+    const welcomeHeading = form.appendChild(document.createElement('h2'));
+    welcomeHeading.className = 'start-game__welcome-heading';
+    welcomeHeading.textContent = 'Welcome, player!';
+
     const nameInput = form.appendChild(document.createElement('input'));
     nameInput.className = 'start-game__name-input';
     nameInput.placeholder = 'Enter your name';
