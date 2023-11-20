@@ -1,8 +1,8 @@
 // import { gameContainer } from "./game";
-import { startGameContainer } from "./startGame";
+import { createStartGameContainer } from "./startGame";
 
 const contentSection = document.createElement('section');
 contentSection.className = 'content-section';
-contentSection.appendChild(startGameContainer); // this will happen on a button click, just doing this for now.
+contentSection.appendChild(createStartGameContainer()); // this will happen on a button click, just doing this for now.
 
 export { contentSection };
