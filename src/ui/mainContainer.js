@@ -1,12 +1,12 @@
-import { nav } from "./nav";
+import { createNav } from "./nav";
 import { contentSection } from "./contentSection";
-import { footer } from "./footer";
+import { createFooter } from "./footer";
 
 const mainContainer = document.createElement('div');
 mainContainer.className = 'main-container';
 
-mainContainer.appendChild(nav);
+mainContainer.appendChild(createNav());
 mainContainer.appendChild(contentSection);
-mainContainer.appendChild(footer);
+mainContainer.appendChild(createFooter());
 
 export { mainContainer };
