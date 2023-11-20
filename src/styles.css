@@ -47,6 +47,11 @@
 
 /* Styles */
 
+::selection {
+  background-color: var(--green);
+  color: var(--bright-black);
+}
+
 body {
   background-color: var(--black);
   color: var(--bright-green);
