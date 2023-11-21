@@ -9,11 +9,9 @@ class Gameboard {
     }
 
     placeShip(...coordinates) {
-        coordinates.forEach(pair => {
-            if (!this._isInBounds(pair)) {
-                throw new Error('Please provide accurate coordinates.');
-            }
-        });
+        if (coordinates.some(pair => !this._isInBounds(pair))) {
+            throw new Error('Please provide accurate coordinates.');
+        }
 
         const shipLength = coordinates.length;
         const newShip = new Ship(shipLength);
@@ -60,7 +58,6 @@ class Gameboard {
         return [x, y];
     }
 
-
     getRandomShipCoordinates(length) {
         const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
         let directionIndex = 0;
@@ -71,11 +68,9 @@ class Gameboard {
                 let allCoordinates = this.getRestOfCoordinates(start, length, directions[directionIndex]);
                 if (allCoordinates.every(pair => this._isInBounds(pair))) {
                     if (allCoordinates.every(pair => this._isEmptyNode(pair))) {
-                        console.log(allCoordinates);
                         return allCoordinates;
                     }
                 }
-                console.log('Changed direction');
                 directionIndex++;
             }
             directionIndex = 0;

@@ -118,7 +118,7 @@ describe('Gameboard', () => {
         expect(testGameboard.getRestOfCoordinates([0, 0], 3, [0, 1])).toEqual([[0, 0], [0, 1], [0, 2]]);
     });
 
-    it.only('getRandomShipCoordinates returns an array of random coordinates in one direction', () => {
+    it('getRandomShipCoordinates returns an array of random coordinates in one direction', () => {
         expect(testGameboard.getRandomShipCoordinates(4)).toHaveLength(4);
     });
 });
