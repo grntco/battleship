@@ -61,16 +61,25 @@ class Gameboard {
     }
 
 
-    createRandomShips() {
-        const allShipsLengths = [2, 2, 3, 3, 4, 5];
+    getRandomShipCoordinates(length) {
+        const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+        let directionIndex = 0;
 
-        for (let i = 0; i < allShipsLengths.length; i++) {
-            const start = this.getRandomCoordinates();
+        while (directionIndex === 0) {
+            let start = this.getRandomCoordinates();
+            while (directionIndex < directions.length) {
+                let allCoordinates = this.getRestOfCoordinates(start, length, directions[directionIndex]);
+                if (allCoordinates.every(pair => this._isInBounds(pair))) {
+                    if (allCoordinates.every(pair => this._isEmptyNode(pair))) {
+                        console.log(allCoordinates);
+                        return allCoordinates;
+                    }
+                }
+                console.log('Changed direction');
+                directionIndex++;
+            }
+            directionIndex = 0;
         }
-
-        const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]];
-
-
     }
 
     getRestOfCoordinates(start, shipLength, direction) {
@@ -101,9 +110,15 @@ class Gameboard {
         return graph;
     }
 
+    _isEmptyNode(coordinates) {
+        const [x, y] = coordinates;
+        const node = this.graph[x][y];
+        return node.isEmpty;
+    }
+
     _isInBounds(coordinates) {
         const [x, y] = coordinates;
-        return (x >= 0 && x < 10) || (y >= 0 && y < 10); 
+        return (x >= 0 && x < 10) && (y >= 0 && y < 10); 
     }
 
     _getShipFromCoordinates(coordinates) {
