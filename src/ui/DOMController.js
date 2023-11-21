@@ -27,6 +27,8 @@ const DOMController = {
             container.appendChild(createGrid(gameboard));
         }
     }
+
+    
 };
 
 export { DOMController };

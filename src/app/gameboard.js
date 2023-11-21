@@ -60,6 +60,32 @@ class Gameboard {
         return [x, y];
     }
 
+
+    createRandomShips() {
+        const allShipsLengths = [2, 2, 3, 3, 4, 5];
+
+        for (let i = 0; i < allShipsLengths.length; i++) {
+            const start = this.getRandomCoordinates();
+        }
+
+        const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+
+
+    }
+
+    getRestOfCoordinates(start, shipLength, direction) {
+        let allCoordinates = [start];
+
+        while (allCoordinates.length < shipLength) {
+            const temp = allCoordinates[allCoordinates.length - 1];
+            const newItem = [temp[0] + direction[0], temp[1] + direction[1]];
+            allCoordinates.push(newItem);
+        }
+
+        return allCoordinates;
+    }
+
+
     _createGraph() {
         const graph = [];
 

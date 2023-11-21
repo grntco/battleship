@@ -63,7 +63,7 @@ describe('Gameboard', () => {
 
     // receiveAttack()
 
-    it.only('receiveAttack increments the hitCount of a specific ship', () => {
+    it('receiveAttack increments the hitCount of a specific ship', () => {
         testGameboard.placeShip([0, 0], [0, 1], [0, 2]);
         testGameboard.receiveAttack([0, 0]);
         expect(testGameboard.ships[0].hitCount).toBe(1);
@@ -111,4 +111,10 @@ describe('Gameboard', () => {
         expect(testGameboard.getRandomCoordinates()).not.toEqual([0, 1]);
     });
 
+
+    // createRandomShips
+
+    it.only('getRestOfCoordinates returns array of coordinates in given direction', () => {
+        expect(testGameboard.getRestOfCoordinates([0, 0], 2, [0, 1])).toEqual([[0, 0], [0, 1]]);
+    });
 });
