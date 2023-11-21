@@ -201,7 +201,20 @@ button:focus {
   border-top: 2px solid var(--bright-green);
   padding: 8px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.footer__gh-link {
+  display: flex;
   align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--bright-green);
+}
+
+.footer__gh-link__gh-icon {
+  height: 1.3rem;
+  fill: var(--bright-green);
 }
 

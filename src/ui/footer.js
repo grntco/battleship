@@ -1,13 +1,21 @@
+import ghIcon from '../assets/images/github-mark.svg';
+
 const createFooter = function() {
     const footer = document.createElement('footer');
     footer.className = 'footer';
 
-    const attribution = footer.appendChild(document.createElement('p'));
-    attribution.className = 'footer__attribution';
-    attribution.textContent = 'Made by grntco';
+    const ghLink = footer.appendChild(document.createElement('a'));
+    ghLink.className = 'footer__gh-link';
+    ghLink.href = 'https://github.com/grntco';
+    ghLink.target = '_blank';
 
-    const ghIcon = footer.appendChild(document.createElement('img'));
-    ghIcon.className = 'footer__gh-icon';
+    const description = ghLink.appendChild(document.createElement('p'));
+    description.className = 'footer__gh-link__description';
+    description.textContent = 'Made by grntco';
+
+    const icon = ghLink.appendChild(document.createElement('img'));
+    icon.className = 'footer__gh-link__gh-icon';
+    icon.src = ghIcon;
 
     return footer;
 };
