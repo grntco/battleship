@@ -12,8 +12,8 @@ class Game {
 
     // Will change this later...
     createAllShips() { 
-        this.playerGameboard.placeShip([0, 1], [0, 2], [0, 3], [0, 4]);
-        this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(5));
+        // this.playerGameboard.placeShip([0, 1], [0, 2], [0, 3], [0, 4]);
+        // this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(5));
         // this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(4));
         // this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(3));
         // this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(3));

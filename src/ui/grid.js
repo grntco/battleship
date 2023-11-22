@@ -6,7 +6,8 @@ function createGrid(gameboard) { // createGridItems?
         const board = gameboard.graph;
         for (let i = board.length - 1; i >= 0; i--) { // reverse to get ships in right order
             for (let j = 0; j < board[i].length; j++) {
-                const node = board[i][j];
+                console.log([j, i]);
+                const node = board[j][i];
                 const gridItem = grid.appendChild(document.createElement('div'));
                 gridItem.className = 'grid-item';
                 if (!node.isEmpty) {
@@ -15,7 +16,7 @@ function createGrid(gameboard) { // createGridItems?
             }
         }
     } else {
-        for (let i = 0; i < 10; i ++) {
+        for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
                 const gridItem = grid.appendChild(document.createElement('div'));
                 gridItem.className = 'grid-item';
