@@ -89,6 +89,46 @@ class Gameboard {
         return allCoordinates;
     }
 
+    adjacentNodesEmpty(coordinates) {
+        const start = coordinates[0];
+        const end = coordinates[coordinates.length - 1];
+        
+        let adjacentCoordinates = [];
+
+        if (start[1] === end[1]) { // if coordinates are horizontal
+            const before = [start[0] - 1, start[1]];
+            const after = [end[0] + 1, end[1]];
+
+            adjacentCoordinates.push(before, after);
+
+            coordinates.forEach(pair => {
+                const adjacentTop = [pair[0], pair[1] + 1];
+                const adjacentBottom = [pair[0], pair[1] - 1];
+
+                adjacentCoordinates.push(adjacentTop, adjacentBottom);
+            });
+        } else if (start[0] === end[0]) { // if coordinates are vertical
+            const before = [start[0], start[1] - 1];
+            const after = [end[0], end[1] + 1];
+
+            adjacentCoordinates.push(before, after);
+
+            coordinates.forEach(pair => {
+                const adjacentLeft = [pair[0] - 1, pair[1]];
+                const adjacentRight = [pair[0] + 1, pair[1]];
+
+                adjacentCoordinates.push(adjacentLeft, adjacentRight);
+            });
+        }
+
+        console.log(adjacentCoordinates);
+        return adjacentCoordinates;
+
+        // reduce to only those coordinates in the board
+        // are all the coordinates corresponding graph nodes empty?
+        // if yes, return true, else, false
+    }
+
 
     _createGraph() {
         const graph = [];

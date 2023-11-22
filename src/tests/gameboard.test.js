@@ -121,4 +121,12 @@ describe('Gameboard', () => {
     it('getRandomShipCoordinates returns an array of random coordinates in one direction', () => {
         expect(testGameboard.getRandomShipCoordinates(4)).toHaveLength(4);
     });
+
+
+    // adjacentNodesEmpty
+
+    it.only('adjacentNodesEmpty with coordinates returns an array of adjacent coordinates', () => {
+        expect(testGameboard.adjacentNodesEmpty([[1, 2], [2, 2]])).toContainEqual([0, 2], [3, 2]);
+        expect(testGameboard.adjacentNodesEmpty([[1, 2], [1, 3], [1, 4], [1, 5]])).toContainEqual([1, 1], [1, 6]);
+    });
 });
