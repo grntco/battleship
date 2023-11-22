@@ -125,8 +125,15 @@ describe('Gameboard', () => {
 
     // adjacentNodesEmpty
 
-    it.only('adjacentNodesEmpty with coordinates returns an array of adjacent coordinates', () => {
-        expect(testGameboard.adjacentNodesEmpty([[1, 2], [2, 2]])).toContainEqual([0, 2], [3, 2]);
-        expect(testGameboard.adjacentNodesEmpty([[1, 2], [1, 3], [1, 4], [1, 5]])).toContainEqual([1, 1], [1, 6]);
+    it.only('getAdjacentCoordinates reduces to only those coordinates in the board', () => {
+        expect(testGameboard.getAdjacentCoordinates([[0, 0], [1, 0]])).not.toContainEqual([-1, 0]);
+        expect(testGameboard.getAdjacentCoordinates([[9, 7], [9, 8], [9, 9]])).not.toContainEqual([9, 10]);
     });
+    
+    // it('adjacentNodesEmpty returns true/false if adjacent nodes are empty/not empty', () => {
+    //     expect(testGameboard.adjacentNodesEmpty([[0, 0], [1, 0]])).toBeTruthy();
+    //     testGameboard.placeShip([8, 9], [9, 9]);
+    //     expect(testGameboard.adjacentNodesEmpty([[6, 9], [7, 9]])).toBeFalsy();
+    //     expect(testGameboard.adjacentNodesEmpty([[9, 7], [9, 8]])).toBeFalsy();
+    // });
 });

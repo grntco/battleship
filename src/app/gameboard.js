@@ -68,7 +68,9 @@ class Gameboard {
                 let allCoordinates = this.getRestOfCoordinates(start, length, directions[directionIndex]);
                 if (allCoordinates.every(pair => this._isInBounds(pair))) {
                     if (allCoordinates.every(pair => this._isEmptyNode(pair))) {
-                        return allCoordinates;
+                        if (this.getAdjacentCoordinates(allCoordinates).every(pair => this._isEmptyNode(pair))) {
+                            return allCoordinates;
+                        }
                     }
                 }
                 directionIndex++;
@@ -89,7 +91,7 @@ class Gameboard {
         return allCoordinates;
     }
 
-    adjacentNodesEmpty(coordinates) {
+    getAdjacentCoordinates(coordinates) {
         const start = coordinates[0];
         const end = coordinates[coordinates.length - 1];
         
@@ -120,13 +122,9 @@ class Gameboard {
                 adjacentCoordinates.push(adjacentLeft, adjacentRight);
             });
         }
-
+        adjacentCoordinates = adjacentCoordinates.filter(pair => this._isInBounds(pair));
         console.log(adjacentCoordinates);
         return adjacentCoordinates;
-
-        // reduce to only those coordinates in the board
-        // are all the coordinates corresponding graph nodes empty?
-        // if yes, return true, else, false
     }
 
 
