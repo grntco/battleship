@@ -186,6 +186,9 @@ button:focus {
 
 .grid-item {
   border: 1px solid var(--bright-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .grid-item:hover {
@@ -193,7 +196,22 @@ button:focus {
   cursor: crosshair;
 }
 
-.grid-ship {
+.grid-item__hit::after { 
+  content: "";
+  padding: 4px;
+  border-radius: 50%;
+  background-color: var(--red);
+  animation: pulse 750ms infinite alternate;
+}
+
+.grid-item__miss::after {
+  content: "";
+  padding: 4px;
+  border-radius: 50%;
+  background-color: var(--white);
+}
+
+.grid-item__ship {
   background-color: var(--green);
 }
 
@@ -217,3 +235,11 @@ button:focus {
   height: 1.3rem;
 }
 
+@keyframes pulse {
+  from {
+    background-color: var(--red);
+  }
+  to {
+    background-color: var(--bright-red);
+  }
+}

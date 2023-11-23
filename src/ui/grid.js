@@ -9,8 +9,9 @@ function createGrid(gameboard) { // createGridItems?
                 const node = board[j][i];
                 const gridItem = grid.appendChild(document.createElement('div'));
                 gridItem.className = 'grid-item';
+                // gridItem.classList.add('grid-item__hit');
                 if (!node.isEmpty) {
-                    gridItem.classList.add('grid-ship');
+                    gridItem.classList.add('grid-item__ship');
                 }
             }
         }
