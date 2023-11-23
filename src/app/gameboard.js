@@ -9,6 +9,7 @@ class Gameboard {
     }
 
     placeShip(...coordinates) {
+        console.log(coordinates);
         if (coordinates.some(pair => !this._isInBounds(pair))) {
             throw new Error('Please provide accurate coordinates.');
         }
@@ -59,7 +60,7 @@ class Gameboard {
     }
 
     getRandomShipCoordinates(length) {
-        const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+        const directions = [[0, 1], [1, 0]]; // [[0, -1], [-1, 0]];
         let directionIndex = 0;
 
         while (directionIndex === 0) {
