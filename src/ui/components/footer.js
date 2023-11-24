@@ -1,4 +1,4 @@
-import ghIcon from '../assets/images/github-mark.svg';
+import ghIcon from "../assets/images/github-mark.svg";
 
 const createFooter = function() {
     const footer = document.createElement('footer');

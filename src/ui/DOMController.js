@@ -1,5 +1,6 @@
 import { Game } from "../app/game";
-import { createGrid } from "./grid";
+import { createGrid } from "./components/grid";
+
 
 const DOMController = {
     newGame: new Game(),
