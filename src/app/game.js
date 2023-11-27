@@ -48,7 +48,7 @@ class Game {
             }
             this.switchTurns();
         }
-        this.gameOver();
+        console.log(this.gameOver());
     }
 
     playerMove() {
@@ -82,7 +82,13 @@ class Game {
     }
 
     gameOver() {
-        console.log(`Game end! The winner is ${this.getWinnerName()}`);
+        let gameOverText = '';
+        if (this.getWinnerName() === 'Computer') {
+            gameOverText = 'Better luck next time. Your enemy wins this game.';
+        } else {
+            gameOverText = 'Nice work captain: you won the game!';
+        }
+        return gameOverText;
     }
 }
 
