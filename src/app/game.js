@@ -25,7 +25,23 @@ class Game {
         this.computerGameboard.placeShip(...this.computerGameboard.getRandomShipCoordinates(3));
         this.computerGameboard.placeShip(...this.computerGameboard.getRandomShipCoordinates(2));
         this.computerGameboard.placeShip(...this.computerGameboard.getRandomShipCoordinates(2));
+    }
 
+    // start() {
+    //     let currentPlayer = this.player;
+    //     currentPlayer.turn = true;
+
+    //     while () {
+    //         if (currentPlayer.turn) { // and the enemy board is clicked?
+    //             // or enable the enemy board to be clicked
+    //             // the player can make a hit
+    //         }
+    //     }
+
+    // }
+
+    hasEnded() {
+        return this.playerGameboard.allShipsSunk() || this.computerGameboard.allShipsSunk();
     }
 }
 

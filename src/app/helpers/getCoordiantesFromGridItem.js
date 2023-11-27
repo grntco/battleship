@@ -3,15 +3,15 @@ export function getCoordinatesOfGridItem(gridItem) {
     const gridItemIndex = allGridItems.indexOf(gridItem);
 
     let numberOfSquaresBefore = allGridItems.slice(0, gridItemIndex).length;
-    let timesLooped = 0;
+    let iterations = 0;
 
     while (numberOfSquaresBefore >= 10) {
         numberOfSquaresBefore -= 10;
-        timesLooped++;
+        iterations++;
     }
 
     const x = numberOfSquaresBefore;
-    const y = 9 - timesLooped;
+    const y = 9 - iterations;
 
     return [x, y];
 }

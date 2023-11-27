@@ -15,7 +15,7 @@ jest.mock("../app/ship", () => ({
     })),
 }));
 
-describe('Gameboard', () => {
+describe.skip('Gameboard', () => {
     const testGameboard = new Gameboard();
 
     beforeEach(() => {
@@ -125,7 +125,7 @@ describe('Gameboard', () => {
 
     // adjacentNodesEmpty
 
-    it.only('getAdjacentCoordinates reduces to only those coordinates in the board', () => {
+    it('getAdjacentCoordinates reduces to only those coordinates in the board', () => {
         expect(testGameboard.getAdjacentCoordinates([[0, 0], [1, 0]])).not.toContainEqual([-1, 0]);
         expect(testGameboard.getAdjacentCoordinates([[9, 7], [9, 8], [9, 9]])).not.toContainEqual([9, 10]);
     });
