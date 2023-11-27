@@ -6,5 +6,5 @@ import { events } from "./ui/events";
 
 document.body.appendChild(createMainContainer());
 DOMController.updateContent(createGameContainer());
-DOMController.newGame.createAllShips();
+DOMController.newGame.start();
 DOMController.refreshGrids();

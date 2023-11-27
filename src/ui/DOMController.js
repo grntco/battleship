@@ -27,7 +27,14 @@ const DOMController = {
             container.removeChild(grid);
             container.appendChild(createGrid(gameboard));
         }
-    }
+    },
+
+    // assignHitOrMissStyle: function(gameboard, gridItem) {
+    //     if (gameboard.)
+    // }
+
+    // start game function
+    // creates a new game loop
     
 };
 

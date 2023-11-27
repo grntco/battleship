@@ -15,7 +15,7 @@ jest.mock("../app/ship", () => ({
     })),
 }));
 
-describe.skip('Gameboard', () => {
+describe('Gameboard', () => {
     const testGameboard = new Gameboard();
 
     beforeEach(() => {

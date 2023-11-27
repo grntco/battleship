@@ -1,47 +1,59 @@
 import { Player } from "./player";
-import { Gameboard } from "./gameboard";
 
 class Game {
     constructor() {
-        this.player = new Player('Grant');
-        this.playerGameboard = new Gameboard();
-        this.computer = new Player('Computer');
-        this.computerGameboard = new Gameboard();
+        this.player;
+        this.computer;
+    }
+
+    initPlayers() {
+        this.player = new Player();
+        this.computer = new Player();
     }
 
     // Will change this later...
-    createAllShips() { 
-        // this.playerGameboard.placeShip([0, 1], [0, 2], [0, 3], [0, 4]);
-        this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(5));
-        this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(4));
-        this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(3));
-        this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(3));
-        this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(2));
-        this.playerGameboard.placeShip(...this.playerGameboard.getRandomShipCoordinates(2));
+    initRandomShips() { 
+        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(5));
+        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(4));
+        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(3));
+        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(3));
+        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(2));
+        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(2));
        
-        this.computerGameboard.placeShip(...this.computerGameboard.getRandomShipCoordinates(5));
-        this.computerGameboard.placeShip(...this.computerGameboard.getRandomShipCoordinates(4));
-        this.computerGameboard.placeShip(...this.computerGameboard.getRandomShipCoordinates(3));
-        this.computerGameboard.placeShip(...this.computerGameboard.getRandomShipCoordinates(3));
-        this.computerGameboard.placeShip(...this.computerGameboard.getRandomShipCoordinates(2));
-        this.computerGameboard.placeShip(...this.computerGameboard.getRandomShipCoordinates(2));
+        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(5));
+        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(4));
+        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(3));
+        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(3));
+        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(2));
+        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(2));
     }
 
-    // start() {
-    //     let currentPlayer = this.player;
-    //     currentPlayer.turn = true;
+    start() {
+        this.initPlayers();
+        // this.initRandomShips();
+        // let currentPlayer = this.player;
+        // currentPlayer.turn = true;
 
-    //     while () {
-    //         if (currentPlayer.turn) { // and the enemy board is clicked?
-    //             // or enable the enemy board to be clicked
-    //             // the player can make a hit
-    //         }
-    //     }
+        // while (!this.hasEnded()) {
+        //     if (currentPlayer.turn) { 
+        //         if (currentPlayer === this.computer) {
+        //             setTimeout(() => {
+        //                 this.playerGameboard.receiveAttack(this.playerGameboard.getRandomCoordinates());
+        //             }, 1000);
+        //             currentPlayer.turn = false;
+        //             currentPlayer = this.player;
+        //         } else {
+        //             // and the enemy board is clicked?
+        //             // or enable the enemy board to be clicked
+        //             // the player can make a hit
+        //         }
+        //     }
+        // }
 
-    // }
+    }
 
     hasEnded() {
-        return this.playerGameboard.allShipsSunk() || this.computerGameboard.allShipsSunk();
+        return this.player.gameboard.allShipsSunk() || this.computer.gameboard.allShipsSunk();
     }
 }
 

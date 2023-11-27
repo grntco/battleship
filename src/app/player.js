@@ -1,12 +1,14 @@
+import { Gameboard } from "./gameboard";
+
 class Player {
-    constructor(name) {
-        this.name = name;
+    constructor() {
         this.turn = false;
+        this.gameboard = new Gameboard();
     }
 
     // maybe...
-    attack(enemyGameboard, coordinates) {
-        enemyGameboard.receiveAttack(coordinates);
+    attack(coordinates, gameboard) {
+        gameboard.receiveAttack(coordinates);
     }
 }
 
