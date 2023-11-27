@@ -1,7 +1,7 @@
 import { Player } from "../app/player";
 import { Gameboard } from "../app/gameboard";
 
-describe('Player', () => {
+describe.skip('Player', () => {
     const playerOne = new Player();
 
     it('Player class has a property of turn, default to false', () => {

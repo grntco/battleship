@@ -7,8 +7,12 @@ class Game {
     }
 
     initPlayers() {
-        this.player = new Player();
-        this.computer = new Player();
+        this.player = new Player('Player');
+        this.computer = new Player('Computer');
+    }
+
+    initPlayerTurn() {
+        this.player.turn = true;
     }
 
     // Will change this later...
@@ -30,30 +34,55 @@ class Game {
 
     start() {
         this.initPlayers();
-        // this.initRandomShips();
-        // let currentPlayer = this.player;
-        // currentPlayer.turn = true;
+        this.initRandomShips();
+        this.initPlayerTurn();
+        this.loopThroughTurns();
+    }
 
-        // while (!this.hasEnded()) {
-        //     if (currentPlayer.turn) { 
-        //         if (currentPlayer === this.computer) {
-        //             setTimeout(() => {
-        //                 this.playerGameboard.receiveAttack(this.playerGameboard.getRandomCoordinates());
-        //             }, 1000);
-        //             currentPlayer.turn = false;
-        //             currentPlayer = this.player;
-        //         } else {
-        //             // and the enemy board is clicked?
-        //             // or enable the enemy board to be clicked
-        //             // the player can make a hit
-        //         }
-        //     }
-        // }
+    loopThroughTurns() {
+        while (!this.hasEnded()) {
+            if (this.computer.turn) {
+                this.computerMove();
+            } else {
+                this.playerMove();
+            }
+            this.switchTurns();
+        }
+        this.gameOver();
+    }
 
+    playerMove() {
+        // this needs help
+        // how to get coordinates from gridItem click?
+        this.player.attack(this.computer.gameboard.getRandomCoordinates(), this.computer.gameboard);
+    }
+
+    computerMove() {
+        // setTimeout(() => {
+            this.computer.attack(this.player.gameboard.getRandomCoordinates(), this.player.gameboard);
+        // }, 1000);
+    }
+
+    switchTurns() {
+        if(this.player.turn) {
+            this.player.turn = false;
+            this.computer.turn = true;
+        } else {
+            this.player.turn = true;
+            this.computer.turn = false;
+        }
     }
 
     hasEnded() {
         return this.player.gameboard.allShipsSunk() || this.computer.gameboard.allShipsSunk();
+    }
+
+    getWinnerName() {
+        return this.player.gameboard.allShipsSunk() ? this.computer.name : this.player.name;
+    }
+
+    gameOver() {
+        console.log(`Game end! The winner is ${this.getWinnerName()}`);
     }
 }
 
