@@ -1,10 +1,17 @@
 import { Game } from "../app/game";
+import { getCoordinatesOfGridItem } from "../app/helpers/getCoordinatesOfGridItem";
 import { createGrid } from "./components/grid";
 
 
 const DOMController = {
-    newGame: new Game(),
+    // gameController?
 
+    loadNewGame: function() {
+        this.game = new Game();
+        this.game.start();
+        this.refreshGrids();
+    },
+    
     _clearContent: function() {
         const contentSection = document.querySelector('.content-section');
         contentSection.innerHTML = '';
@@ -18,7 +25,7 @@ const DOMController = {
 
     refreshGrids: function() {
         const gridContainers = document.querySelectorAll('.grid-container');
-        const gameboards = [this.newGame.playerGameboard, this.newGame.computerGameboard];
+        const gameboards = [this.game.player.gameboard, this.game.computer.gameboard];
 
         for (let i = 0; i < 2; i++) {
             const container = gridContainers[i];
@@ -29,13 +36,13 @@ const DOMController = {
         }
     },
 
-    // assignHitOrMissStyle: function(gameboard, gridItem) {
-    //     if (gameboard.)
-    // }
+    handleGridItemClick: function(gridItem) {
+        const coordinates = getCoordinatesOfGridItem(gridItem);
+        this.game.playRound(coordinates);
 
-    // start game function
-    // creates a new game loop
-    
+        
+
+    },    
 };
 
 export { DOMController };

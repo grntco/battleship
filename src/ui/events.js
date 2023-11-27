@@ -1,12 +1,12 @@
 // this will only be grid items of the computer gameboard, though, I think
-import { getCoordinatesOfGridItem } from "../app/helpers/getCoordiantesFromGridItem";
+import { DOMController } from "./DOMController";
 
 export const events = (function() {
     document.addEventListener('click', function(e) {
         const target = e.target;
 
         if (target.classList.contains('grid-item')) {
-            getCoordinatesOfGridItem(target);
+            DOMController.handleGridItemClick(target);
         }
     });
 })();

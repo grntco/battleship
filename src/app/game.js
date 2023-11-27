@@ -36,31 +36,53 @@ class Game {
         this.initPlayers();
         this.initRandomShips();
         this.initPlayerTurn();
-        this.loopThroughTurns();
+        // this.loopThroughTurns();
+
     }
 
-    loopThroughTurns() {
-        while (!this.hasEnded()) {
-            if (this.computer.turn) {
-                this.computerMove();
-            } else {
-                this.playerMove();
-            }
-            this.switchTurns();
+    playRound(coordinates) {
+        if (this.player.turn) {
+            this.playerMove(coordinates);
+        } else {
+            throw new Error('Not your turn yet!');
         }
-        console.log(this.gameOver());
+
+        this.switchTurns();
+
+        setTimeout(() => {
+            this.computerMove();
+        }, 1000);
+        
+        this.switchTurns();
+
+        if (this.hasEnded()) {
+            this.gameOver();
+        }
     }
 
-    playerMove() {
-        // this needs help
-        // how to get coordinates from gridItem click?
-        this.player.attack(this.computer.gameboard.getRandomCoordinates(), this.computer.gameboard);
+    // loopThroughTurns() {
+    //     while (!this.hasEnded()) {
+    //         if (this.computer.turn) {
+    //             this.computerMove();
+    //         } else if (this.player.turn) {
+    //             // enables player to click? sets some variable playerTurn to true,
+    //             // which enables the click elsewhere in the event handler or DOMController
+    //             this.playerMove();
+    //         }
+    //         this.switchTurns();
+    //     }
+    //     console.log(this.gameOver());
+    // }
+
+    playerMove(coordinates) {
+        this.player.attack(coordinates, this.computer.gameboard);
+        console.log(coordinates);
     }
 
     computerMove() {
-        // setTimeout(() => {
-            this.computer.attack(this.player.gameboard.getRandomCoordinates(), this.player.gameboard);
-        // }, 1000);
+        const coordinates = this.player.gameboard.getRandomCoordinates();
+        this.computer.attack(coordinates, this.player.gameboard);
+        console.log(coordinates);
     }
 
     switchTurns() {
@@ -86,7 +108,7 @@ class Game {
         if (this.getWinnerName() === 'Computer') {
             gameOverText = 'Better luck next time. Your enemy wins this game.';
         } else {
-            gameOverText = 'Nice work captain: you won the game!';
+            gameOverText = 'Great work captain: you won the game!';
         }
         return gameOverText;
     }
