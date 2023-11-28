@@ -21,7 +21,7 @@ describe.skip('Gameboard', () => {
     beforeEach(() => {
         testGameboard.graph.forEach(row => {
             row.forEach(node => {
-                node.isEmpty = true;
+                node.hasShip = false;
             });
         });
 
@@ -29,8 +29,8 @@ describe.skip('Gameboard', () => {
     });
 
     it('Creates a graph', () => {
-        expect(testGameboard.graph[0][0]).toEqual({ isEmpty: true });
-        expect(testGameboard.graph[9][9]).toEqual({ isEmpty: true });
+        expect(testGameboard.graph[0][0]).toEqual({ hasShip: false });
+        expect(testGameboard.graph[9][9]).toEqual({ hasShip: false });
     });
 
     it('placeShip calls Ship class', () => {        
@@ -40,14 +40,14 @@ describe.skip('Gameboard', () => {
 
     it('placeShip fills empty graph coordinates with a "ship"', () => {
         testGameboard.placeShip([0, 0]);
-        expect(testGameboard.graph[0][0]).toEqual({ isEmpty: false });
+        expect(testGameboard.graph[0][0]).toEqual({ hasShip: true });
     });
 
     it('placeShip creates a ship of length of its coordinates passed in', () => {
         testGameboard.placeShip([0, 0], [0, 1], [0, 2]);
-        expect(testGameboard.graph[0][0]).toEqual({ isEmpty: false });
-        expect(testGameboard.graph[0][1]).toEqual({ isEmpty: false });
-        expect(testGameboard.graph[0][2]).toEqual({ isEmpty: false });
+        expect(testGameboard.graph[0][0]).toEqual({ hasShip: true });
+        expect(testGameboard.graph[0][1]).toEqual({ hasShip: true });
+        expect(testGameboard.graph[0][2]).toEqual({ hasShip: true });
     });
 
     it('placeShip with invalid coordinates throws an error', () => {

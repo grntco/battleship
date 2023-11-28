@@ -20,8 +20,8 @@ class Gameboard {
             const [x, y] = pair;
             const node = this.graph[x][y];
 
-            if (node.isEmpty) {
-                node.isEmpty = false;
+            if (!node.hasShip) {
+                node.hasShip = true;
                 newShip.coordinates.push([x, y]);
             }
         });
@@ -35,7 +35,8 @@ class Gameboard {
     receiveAttack(coordinates) {
         const [x, y] = coordinates;
         const node = this.graph[x][y];
-        if (node.isEmpty) {
+        node.isShot = true;
+        if (!node.hasShip) {
             this.missedShots.push(coordinates);
         } else {
             const targetShip = this._getShipFromCoordinates(coordinates);
@@ -51,8 +52,8 @@ class Gameboard {
     getRandomCoordinates() {
         let x = Math.floor(Math.random() * 10);
         let y = Math.floor(Math.random() * 10);
-        if (this._areCoodinatesInArray([x, y], this.missedShots)
-        || this._areCoodinatesInArray([x, y], this.hitShots)) {
+        if (this._areCoordinatesInArray([x, y], this.missedShots)
+        || this._areCoordinatesInArray([x, y], this.hitShots)) {
             this.getRandomCoordinates();
         }
         return [x, y];
@@ -67,8 +68,8 @@ class Gameboard {
             while (directionIndex < directions.length) {
                 let allCoordinates = this.getRestOfCoordinates(start, length, directions[directionIndex]);
                 if (allCoordinates.every(pair => this._isInBounds(pair))) {
-                    if (allCoordinates.every(pair => this._isEmptyNode(pair))) {
-                        if (this.getAdjacentCoordinates(allCoordinates).every(pair => this._isEmptyNode(pair))) {
+                    if (allCoordinates.every(pair => !this._hasShip(pair))) {
+                        if (this.getAdjacentCoordinates(allCoordinates).every(pair => !this._hasShip(pair))) {
                             return allCoordinates;
                         }
                     }
@@ -133,7 +134,7 @@ class Gameboard {
         for (let i = 0; i < 10; i++) {
             const row = [];
             for (let j = 0; j < 10; j++) {
-                const node = { isEmpty: true };
+                const node = { hasShip: false, isShot: false };
                 row.push(node);
             }
             graph.push(row);
@@ -142,10 +143,10 @@ class Gameboard {
         return graph;
     }
 
-    _isEmptyNode(coordinates) {
+    _hasShip(coordinates) {
         const [x, y] = coordinates;
         const node = this.graph[x][y];
-        return node.isEmpty;
+        return node.hasShip;
     }
 
     _isInBounds(coordinates) {
@@ -155,11 +156,11 @@ class Gameboard {
 
     _getShipFromCoordinates(coordinates) {
         return this.ships.find(ship => 
-            this._areCoodinatesInArray(coordinates, ship.coordinates)
+            this._areCoordinatesInArray(coordinates, ship.coordinates)
         );
     }
 
-    _areCoodinatesInArray(coordinates, array) {
+    _areCoordinatesInArray(coordinates, array) {
         return array.some(pair => pair.every((value, index) => 
             value === coordinates[index]
         ));

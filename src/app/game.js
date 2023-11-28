@@ -36,10 +36,9 @@ class Game {
         this.initPlayers();
         this.initRandomShips();
         this.initPlayerTurn();
-        // this.loopThroughTurns();
-
     }
 
+    // game "loop"
     playRound(coordinates) {
         if (this.player.turn) {
             this.playerMove(coordinates);
@@ -49,38 +48,29 @@ class Game {
 
         this.switchTurns();
 
-        setTimeout(() => {
+        // setTimeout(() => {
             this.computerMove();
-        }, 1000);
+        // }, 1000);
         
         this.switchTurns();
 
         if (this.hasEnded()) {
-            this.gameOver();
+            console.log(this.gameOver());
         }
     }
 
-    // loopThroughTurns() {
-    //     while (!this.hasEnded()) {
-    //         if (this.computer.turn) {
-    //             this.computerMove();
-    //         } else if (this.player.turn) {
-    //             // enables player to click? sets some variable playerTurn to true,
-    //             // which enables the click elsewhere in the event handler or DOMController
-    //             this.playerMove();
-    //         }
-    //         this.switchTurns();
-    //     }
-    //     console.log(this.gameOver());
-    // }
+    isAHit(coordinates, gameboard) {
+        const [x, y] = coordinates;
+        const node = gameboard.graph[x][y];
+        return node.hasShip && node.isShot;
+    }
 
     playerMove(coordinates) {
         this.player.attack(coordinates, this.computer.gameboard);
         console.log(coordinates);
     }
 
-    computerMove() {
-        const coordinates = this.player.gameboard.getRandomCoordinates();
+    computerMove(coordinates = this.player.gameboard.getRandomCoordinates()) {
         this.computer.attack(coordinates, this.player.gameboard);
         console.log(coordinates);
     }
