@@ -3,7 +3,6 @@ import { getCoordinatesOfGridItem } from "../app/helpers/getCoordinatesOfGridIte
 import { getGridItemFromCoordinates } from "../app/helpers/getGridItemFromCoordinates";
 import { createGrid } from "./components/grid";
 
-
 const DOMController = {
     loadNewGame: function() {
         this.game = new Game();
@@ -60,7 +59,6 @@ const DOMController = {
         const coordinates = getCoordinatesOfGridItem(gridItem);
         this.game.playRound(coordinates);
         this.updateHitsAndMisses();
-
     },
 };
 

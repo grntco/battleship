@@ -197,7 +197,11 @@ button:focus {
   cursor: crosshair;
 }
 
-.grid-item__hit::after { 
+.grid-item__ship {
+  background-color: var(--green);
+}
+
+.grid-item__hit::after {
   content: "";
   padding: 4px;
   border-radius: 50%;
@@ -210,10 +214,6 @@ button:focus {
   padding: 4px;
   border-radius: 50%;
   background-color: var(--white);
-}
-
-.grid-item__ship {
-  background-color: var(--green);
 }
 
 .footer {
@@ -239,8 +239,15 @@ button:focus {
 @keyframes pulse {
   from {
     background-color: var(--red);
+    -webkit-box-shadow: 0px 0px 20px 2px var(--red);
+    -moz-box-shadow: 0px 0px 20px 2px var(--red);
+    box-shadow: 0px 0px 20px 2px var(--red);
   }
   to {
     background-color: var(--bright-red);
+    -webkit-box-shadow: 0px 0px 20px 5px var(--red);
+    -moz-box-shadow: 0px 0px 20px 5px var(--red);
+    box-shadow: 0px 0px 20px 5px var(--red);
+    transform: scale(1.2);
   }
 }
