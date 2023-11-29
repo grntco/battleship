@@ -54,7 +54,7 @@ class Gameboard {
         let y = Math.floor(Math.random() * 10);
         if (this._areCoordinatesInArray([x, y], this.missedShots)
         || this._areCoordinatesInArray([x, y], this.hitShots)) {
-            this.getRandomCoordinates();
+            return this.getRandomCoordinates();
         }
         return [x, y];
     }

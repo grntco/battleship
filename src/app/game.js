@@ -67,7 +67,7 @@ class Game {
 
     playerMove(coordinates) {
         this.player.attack(coordinates, this.computer.gameboard);
-        console.log(coordinates);
+        // console.log(coordinates);
     }
 
     computerMove(coordinates = this.player.gameboard.getRandomCoordinates()) {
