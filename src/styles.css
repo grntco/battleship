@@ -155,6 +155,8 @@ button:focus {
 .grid-container {
   display: grid;
   grid-template-columns: 1fr, 322px;
+  /* grid-template-rows: 1fr, 322px, 1fr; */
+  /* hmm^ */
 }
 
 .grid-container__x-axis-container {
@@ -174,6 +176,17 @@ button:focus {
   justify-content: center;
   padding: 4px;
   font-size: 0.8rem;
+}
+
+.grid-container__title {
+  grid-row: 3 / 4;
+  grid-column: 2 / 3;
+  justify-self: center;
+  margin-top: 8px;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
 }
 
 .grid {

@@ -9,6 +9,7 @@ const DOMController = {
         this.game.start();
         this.refreshGrids();
         this._displayShipsOnPlayerGrid();
+        this._updateGridTitles();
     },
 
     updateContent: function(newContentFunc) {
@@ -29,6 +30,16 @@ const DOMController = {
             container.appendChild(createGrid(gameboard));
         }
     },
+
+    _updateGridTitles: function() {
+        const gridContainers = document.querySelectorAll('.grid-container');
+        const playerGridTitle = gridContainers[0].querySelector('.grid-container__title');
+        const computerGridTitle = gridContainers[1].querySelector('.grid-container__title');
+
+        playerGridTitle.textContent = 'Your Board';
+        computerGridTitle.textContent = 'Enemy Board';
+
+    }, 
 
     handleGridItemClick: function(gridItem) {
         const coordinates = getCoordinatesOfGridItem(gridItem);

@@ -7,6 +7,10 @@ const createGameContainer = function() {
     const createGridContainer = function() {
         const gridContainer = document.createElement('div');
         gridContainer.className = 'grid-container';
+
+        const gridTitle = document.createElement('h3');
+        gridTitle.className = 'grid-container__title';
+        gridTitle.textContent = 'Board';
             
         const createAxis = function(type) {
             const axis = document.createElement('div');
@@ -28,9 +32,11 @@ const createGameContainer = function() {
             return axis;
         };
 
+
         gridContainer.appendChild(createAxis('x'));
         gridContainer.appendChild(createAxis('y'));
         gridContainer.appendChild(createGrid());
+        gridContainer.appendChild(gridTitle);
 
         return gridContainer;
     };
