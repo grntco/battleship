@@ -8,12 +8,7 @@ const DOMController = {
         this.game = new Game();
         this.game.start();
         this.refreshGrids();
-        this.displayShipsOnPlayerGrid();
-    },
-    
-    _clearContent: function() {
-        const contentSection = document.querySelector('.content-section');
-        contentSection.innerHTML = '';
+        this._displayShipsOnPlayerGrid();
     },
 
     updateContent: function(newContentFunc) {
@@ -35,7 +30,13 @@ const DOMController = {
         }
     },
 
-    displayShipsOnPlayerGrid: function() {
+    handleGridItemClick: function(gridItem) {
+        const coordinates = getCoordinatesOfGridItem(gridItem);
+        this.game.playRound(coordinates);
+        this._updateHitsAndMisses();
+    },
+
+    _displayShipsOnPlayerGrid: function() {
         const playerAllGridItems = [...document.querySelectorAll('.grid')][0].children;
         const playerGameboard = this.game.player.gameboard;
 
@@ -49,7 +50,7 @@ const DOMController = {
         }
     },
 
-    updateHitsAndMisses: function() {
+    _updateHitsAndMisses: function() {
         const gridContainers = document.querySelectorAll('.grid-container');
         const gameboards = [this.game.player.gameboard, this.game.computer.gameboard];
 
@@ -70,10 +71,9 @@ const DOMController = {
         } 
     },
 
-    handleGridItemClick: function(gridItem) {
-        const coordinates = getCoordinatesOfGridItem(gridItem);
-        this.game.playRound(coordinates);
-        this.updateHitsAndMisses();
+    _clearContent: function() {
+        const contentSection = document.querySelector('.content-section');
+        contentSection.innerHTML = '';
     },
 };
 
