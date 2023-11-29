@@ -25,10 +25,7 @@ class Gameboard {
                 newShip.coordinates.push([x, y]);
             }
         });
-        // might not need this below;
-        // could each gameboard have a list of ships already not created on game start,
-        // and then go through them? 
-        // or would that be in the game?
+        
         this.ships.push(newShip);
     }
 
