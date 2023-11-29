@@ -72,7 +72,7 @@ class Game {
 
     computerMove(coordinates = this.player.gameboard.getRandomCoordinates()) {
         this.computer.attack(coordinates, this.player.gameboard);
-        console.log(coordinates);
+        // console.log(coordinates);
     }
 
     switchTurns() {

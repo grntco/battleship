@@ -8,6 +8,7 @@ const DOMController = {
         this.game = new Game();
         this.game.start();
         this.refreshGrids();
+        this.displayShipsOnPlayerGrid();
     },
     
     _clearContent: function() {
@@ -34,7 +35,21 @@ const DOMController = {
         }
     },
 
-    updateHitsAndMisses() {
+    displayShipsOnPlayerGrid: function() {
+        const playerAllGridItems = [...document.querySelectorAll('.grid')][0].children;
+        const playerGameboard = this.game.player.gameboard;
+
+        for (let i = 0; i < playerAllGridItems.length; i++) {
+            const [x, y] = getCoordinatesOfGridItem(playerAllGridItems[i]);
+            for (let j = 0; j < playerGameboard.ships.length; j++) {
+                if (playerGameboard._areCoordinatesInArray([x, y], playerGameboard.ships[j].coordinates)) {
+                    playerAllGridItems[i].classList.add('grid-item__ship');
+                }
+            }
+        }
+    },
+
+    updateHitsAndMisses: function() {
         const gridContainers = document.querySelectorAll('.grid-container');
         const gameboards = [this.game.player.gameboard, this.game.computer.gameboard];
 
