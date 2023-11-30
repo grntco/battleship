@@ -11,24 +11,18 @@ class Game {
     }
 
     // Will change this later...
-    initRandomShips() { 
-        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(5));
-        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(4));
-        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(3));
-        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(3));
-        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(2));
-        this.player.gameboard.placeShip(...this.player.gameboard.getRandomShipCoordinates(2));
-       
-        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(5));
-        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(4));
-        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(3));
-        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(3));
-        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(2));
-        this.computer.gameboard.placeShip(...this.computer.gameboard.getRandomShipCoordinates(2));
+    initRandomShips(gameboard) { 
+        gameboard.placeShip(...gameboard.getRandomShipCoordinates(5));
+        gameboard.placeShip(...gameboard.getRandomShipCoordinates(4));
+        gameboard.placeShip(...gameboard.getRandomShipCoordinates(3));
+        gameboard.placeShip(...gameboard.getRandomShipCoordinates(3));
+        gameboard.placeShip(...gameboard.getRandomShipCoordinates(2));
+        gameboard.placeShip(...gameboard.getRandomShipCoordinates(2));
     }
 
     start() {
-        this.initRandomShips();
+        this.initRandomShips(this.player.gameboard);
+        this.initRandomShips(this.computer.gameboard);
         this.initPlayerTurn();
     }
 

@@ -16,7 +16,7 @@ const DOMController = {
     updateContent: function(newContentFunc) {
         const contentSection = document.querySelector('.content-section');
         this._clearContent();
-        contentSection.appendChild(newContentFunc);        
+        contentSection.appendChild(newContentFunc);  
     },
 
     refreshGrids: function() {
@@ -52,6 +52,7 @@ const DOMController = {
         computerGridTitle.textContent = 'Enemy Board';
     }, 
 
+    // play the round
     handleGridItemClick: function(gridItem) {
         const coordinates = getCoordinatesOfGridItem(gridItem);
         this.game.playRound(coordinates);
