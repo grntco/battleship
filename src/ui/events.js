@@ -14,5 +14,13 @@ export const events = (function() {
         }
 
     });
+
+    document.addEventListener('mousemove', handleShipFollowCursor);
 })();
+
+function handleShipFollowCursor(e) {
+    const ship = document.querySelector('.ship-setup__ship-container');
+    ship.style.left = e.pageX + 'px';
+    ship.style.top = e.pageY + 'px';
+}
 
