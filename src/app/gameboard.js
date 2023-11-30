@@ -5,7 +5,7 @@ class Gameboard {
         this.graph = this._createGraph();
         this.missedShots = [];
         this.hitShots = [];
-        this.ships = []; // maybe...
+        this.ships = [];
     }
 
     placeShip(...coordinates) {
@@ -25,20 +25,20 @@ class Gameboard {
                 newShip.coordinates.push([x, y]);
             }
         });
-        
+
         this.ships.push(newShip);
     }
 
-    receiveAttack(coordinates) {
-        const [x, y] = coordinates;
+    receiveAttack([x, y]) {
+        // const [x, y] = coordinates;
         const node = this.graph[x][y];
         node.isShot = true;
         if (!node.hasShip) {
-            this.missedShots.push(coordinates);
+            this.missedShots.push([x, y]);
         } else {
-            const targetShip = this._getShipFromCoordinates(coordinates);
+            const targetShip = this._getShipFromCoordinates([x, y]);
             targetShip.hit();
-            this.hitShots.push(coordinates);
+            this.hitShots.push([x, y]);
         }
     }
 
@@ -49,11 +49,14 @@ class Gameboard {
     getRandomCoordinates() {
         let x = Math.floor(Math.random() * 10);
         let y = Math.floor(Math.random() * 10);
-        if (this._areCoordinatesInArray([x, y], this.missedShots)
-        || this._areCoordinatesInArray([x, y], this.hitShots)) {
+        if (this.alreadyPlayed([x, y])) {
             return this.getRandomCoordinates();
         }
         return [x, y];
+    }
+
+    alreadyPlayed([x, y]) {
+        return this.areCoordinatesInArray([x, y], this.missedShots) || this.areCoordinatesInArray([x, y], this.hitShots);
     }
 
     getRandomShipCoordinates(length) {
@@ -124,6 +127,11 @@ class Gameboard {
         return adjacentCoordinates;
     }
 
+    areCoordinatesInArray([x, y], array) {
+        return array.some(pair => pair.every((value, index) => 
+            value === [x, y][index]
+        ));
+    }
 
     _createGraph() {
         const graph = [];
@@ -140,27 +148,19 @@ class Gameboard {
         return graph;
     }
 
-    _hasShip(coordinates) {
-        const [x, y] = coordinates;
+    _hasShip([x, y]) {
         const node = this.graph[x][y];
         return node.hasShip;
     }
 
-    _isInBounds(coordinates) {
-        const [x, y] = coordinates;
+    _isInBounds([x, y]) {
         return (x >= 0 && x < 10) && (y >= 0 && y < 10); 
     }
 
-    _getShipFromCoordinates(coordinates) {
+    _getShipFromCoordinates([x, y]) {
         return this.ships.find(ship => 
-            this._areCoordinatesInArray(coordinates, ship.coordinates)
+            this.areCoordinatesInArray([x, y], ship.coordinates)
         );
-    }
-
-    _areCoordinatesInArray(coordinates, array) {
-        return array.some(pair => pair.every((value, index) => 
-            value === coordinates[index]
-        ));
     }
 }
 

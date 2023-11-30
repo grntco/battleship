@@ -27,18 +27,20 @@ class Game {
     }
 
     playRound(coordinates) {
-        if (this.player.turn) {
-            this.playerMove(coordinates);
-        } else {
-            throw new Error('Not your turn yet!');
-        }
-
-        this.switchTurns();
-        this.computerMove();
-        this.switchTurns();
-
-        if (this.hasEnded()) {
-            console.log(this.getGameResult());
+        if (!this.computer.gameboard.alreadyPlayed(coordinates)) {  
+            if (this.player.turn) {
+                this.playerMove(coordinates);
+            } else {
+                throw new Error('Not your turn yet!');
+            }
+    
+            this.switchTurns();
+            this.computerMove();
+            this.switchTurns();
+    
+            if (this.hasEnded()) {
+                console.log(this.getGameResult());
+            }
         }
     }
 

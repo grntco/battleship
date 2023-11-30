@@ -71,7 +71,7 @@ const DOMController = {
         for (let i = 0; i < playerAllGridItems.length; i++) {
             const [x, y] = getCoordinatesOfGridItem(playerAllGridItems[i]);
             for (let j = 0; j < playerGameboard.ships.length; j++) {
-                if (playerGameboard._areCoordinatesInArray([x, y], playerGameboard.ships[j].coordinates)) {
+                if (playerGameboard.areCoordinatesInArray([x, y], playerGameboard.ships[j].coordinates)) {
                     playerAllGridItems[i].classList.add('grid-item__ship');
                 }
             }
