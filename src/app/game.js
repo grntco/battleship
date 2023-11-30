@@ -26,10 +26,10 @@ class Game {
         this.initPlayerTurn();
     }
 
-    playRound(coordinates) {
-        if (!this.computer.gameboard.alreadyPlayed(coordinates)) {  
+    playRound([x, y]) {
+        if (!this.computer.gameboard.alreadyPlayed([x, y])) {  
             if (this.player.turn) {
-                this.playerMove(coordinates);
+                this.playerMove([x, y]);
             } else {
                 throw new Error('Not your turn yet!');
             }
@@ -44,18 +44,17 @@ class Game {
         }
     }
 
-    isAHit(coordinates, gameboard) {
-        const [x, y] = coordinates;
+    isAHit([x, y], gameboard) {
         const node = gameboard.graph[x][y];
         return node.hasShip && node.isShot;
     }
 
-    playerMove(coordinates) {
-        this.player.attack(coordinates, this.computer.gameboard);
+    playerMove([x, y]) {
+        this.player.attack([x, y], this.computer.gameboard);
     }
 
-    computerMove(coordinates = this.player.gameboard.getRandomCoordinates()) {
-        this.computer.attack(coordinates, this.player.gameboard);
+    computerMove([x, y] = this.player.gameboard.getRandomCoordinates()) {
+        this.computer.attack([x, y], this.player.gameboard);
     }
 
     switchTurns() {

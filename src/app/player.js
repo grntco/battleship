@@ -8,8 +8,8 @@ class Player {
     }
 
     // maybe...
-    attack(coordinates, gameboard) {
-        gameboard.receiveAttack(coordinates);
+    attack([x, y], gameboard) {
+        gameboard.receiveAttack([x, y]);
     }
 }
 

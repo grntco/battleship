@@ -54,8 +54,8 @@ const DOMController = {
 
     // play the round
     handleGridItemClick: function(gridItem) {
-        const coordinates = getCoordinatesOfGridItem(gridItem);
-        this.game.playRound(coordinates);
+        const [x, y] = getCoordinatesOfGridItem(gridItem);
+        this.game.playRound([x, y]);
         this._updateHitsAndMisses();
         if (this.game.hasEnded()) this.displayGameOver();
     },
@@ -83,15 +83,15 @@ const DOMController = {
         const gameboards = [this.game.player.gameboard, this.game.computer.gameboard];
 
         for (let i = 0; i < 2; i++) {
-            gameboards[i].hitShots.forEach(pair => {
-                const gridItem = getGridItemFromCoordinates(pair, gridContainers[i]);
+            gameboards[i].hitShots.forEach(([x, y]) => {
+                const gridItem = getGridItemFromCoordinates([x, y], gridContainers[i]);
                 if (!gridItem.classList.contains('grid-item__hit')) {
                     gridItem.classList.add('grid-item__hit');
                 }
             });
 
-            gameboards[i].missedShots.forEach(pair => {
-                const gridItem = getGridItemFromCoordinates(pair, gridContainers[i]);
+            gameboards[i].missedShots.forEach(([x, y]) => {
+                const gridItem = getGridItemFromCoordinates([x, y], gridContainers[i]);
                 if (!gridItem.classList.contains('grid-item__miss')) {
                     gridItem.classList.add('grid-item__miss');
                 }

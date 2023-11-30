@@ -9,15 +9,14 @@ class Gameboard {
     }
 
     placeShip(...coordinates) {
-        if (coordinates.some(pair => !this._isInBounds(pair))) {
+        if (coordinates.some(([x, y]) => !this._isInBounds([x, y]))) {
             throw new Error('Please provide accurate coordinates.');
         }
 
         const shipLength = coordinates.length;
         const newShip = new Ship(shipLength);
 
-        coordinates.forEach(pair => {
-            const [x, y] = pair;
+        coordinates.forEach(([x, y]) => {
             const node = this.graph[x][y];
 
             if (!node.hasShip) {
@@ -30,7 +29,6 @@ class Gameboard {
     }
 
     receiveAttack([x, y]) {
-        // const [x, y] = coordinates;
         const node = this.graph[x][y];
         node.isShot = true;
         if (!node.hasShip) {
@@ -67,9 +65,9 @@ class Gameboard {
             let start = this.getRandomCoordinates();
             while (directionIndex < directions.length) {
                 let allCoordinates = this.getRestOfCoordinates(start, length, directions[directionIndex]);
-                if (allCoordinates.every(pair => this._isInBounds(pair))) {
-                    if (allCoordinates.every(pair => !this._hasShip(pair))) {
-                        if (this.getAdjacentCoordinates(allCoordinates).every(pair => !this._hasShip(pair))) {
+                if (allCoordinates.every(([x, y]) => this._isInBounds([x, y]))) {
+                    if (allCoordinates.every(([x, y]) => !this._hasShip([x, y]))) {
+                        if (this.getAdjacentCoordinates(allCoordinates).every(([x, y]) => !this._hasShip([x, y]))) {
                             return allCoordinates;
                         }
                     }
@@ -92,9 +90,9 @@ class Gameboard {
         return allCoordinates;
     }
 
-    getAdjacentCoordinates(coordinates) {
-        const start = coordinates[0];
-        const end = coordinates[coordinates.length - 1];
+    getAdjacentCoordinates(shipCoordinates) {
+        const start = shipCoordinates[0];
+        const end = shipCoordinates[shipCoordinates.length - 1];
         
         let adjacentCoordinates = [];
 
@@ -104,9 +102,9 @@ class Gameboard {
 
             adjacentCoordinates.push(before, after);
 
-            coordinates.forEach(pair => {
-                const adjacentTop = [pair[0], pair[1] + 1];
-                const adjacentBottom = [pair[0], pair[1] - 1];
+            shipCoordinates.forEach(([x, y]) => {
+                const adjacentTop = [x, y + 1];
+                const adjacentBottom = [x, y - 1];
 
                 adjacentCoordinates.push(adjacentTop, adjacentBottom);
             });
@@ -116,19 +114,19 @@ class Gameboard {
 
             adjacentCoordinates.push(before, after);
 
-            coordinates.forEach(pair => {
-                const adjacentLeft = [pair[0] - 1, pair[1]];
-                const adjacentRight = [pair[0] + 1, pair[1]];
+            shipCoordinates.forEach(([x, y]) => {
+                const adjacentLeft = [x - 1, y];
+                const adjacentRight = [x + 1, y];
 
                 adjacentCoordinates.push(adjacentLeft, adjacentRight);
             });
         }
-        adjacentCoordinates = adjacentCoordinates.filter(pair => this._isInBounds(pair));
+        adjacentCoordinates = adjacentCoordinates.filter(([x, y]) => this._isInBounds([x, y]));
         return adjacentCoordinates;
     }
 
     areCoordinatesInArray([x, y], array) {
-        return array.some(pair => pair.every((value, index) => 
+        return array.some(([a, b]) => [a, b].every((value, index) => 
             value === [x, y][index]
         ));
     }
