@@ -31,6 +31,10 @@ const DOMController = {
         }
     },
 
+    displayGameOverModal: function() {
+        
+    },
+
     _updateGridTitles: function() {
         const gridContainers = document.querySelectorAll('.grid-container');
         const playerGridTitle = gridContainers[0].querySelector('.grid-container__title');
