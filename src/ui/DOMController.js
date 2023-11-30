@@ -32,10 +32,21 @@ const DOMController = {
         }
     },
 
-    displayGameOver: function() {
-        this._clearContent();
-        this._getContentSection().appendChild(createGameOverContainer());
-        this._displayGameResult();
+    // play the round
+    handleGridItemClick: function(gridItem) {
+        const [x, y] = getCoordinatesOfGridItem(gridItem);
+        this.game.playRound([x, y]);
+        this._updateHitsAndMisses();
+        if (this.game.hasEnded()) {
+            this.updateContent(createGameOverContainer());
+            this._displayGameResult();
+        };
+    },
+
+
+    _clearContent: function() {
+        const contentSection = document.querySelector('.content-section');
+        contentSection.innerHTML = '';
     },
 
     _displayGameResult: function() {
@@ -51,18 +62,6 @@ const DOMController = {
         playerGridTitle.textContent = 'Your Board';
         computerGridTitle.textContent = 'Enemy Board';
     }, 
-
-    // play the round
-    handleGridItemClick: function(gridItem) {
-        const [x, y] = getCoordinatesOfGridItem(gridItem);
-        this.game.playRound([x, y]);
-        this._updateHitsAndMisses();
-        if (this.game.hasEnded()) this.displayGameOver();
-    },
-
-    _getContentSection: function() {
-        return document.querySelector('.content-section');
-    },
 
     _displayShipsOnPlayerGrid: function() {
         const playerAllGridItems = [...document.querySelectorAll('.grid')][0].children;
@@ -97,11 +96,6 @@ const DOMController = {
                 }
             });
         } 
-    },
-
-    _clearContent: function() {
-        const contentSection = document.querySelector('.content-section');
-        contentSection.innerHTML = '';
     },
 };
 
