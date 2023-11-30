@@ -2,11 +2,6 @@ import { Player } from "./player";
 
 class Game {
     constructor() {
-        this.player;
-        this.computer;
-    }
-
-    initPlayers() {
         this.player = new Player('Player');
         this.computer = new Player('Computer');
     }
@@ -33,12 +28,10 @@ class Game {
     }
 
     start() {
-        this.initPlayers();
         this.initRandomShips();
         this.initPlayerTurn();
     }
 
-    // game "loop"
     playRound(coordinates) {
         if (this.player.turn) {
             this.playerMove(coordinates);
@@ -47,11 +40,7 @@ class Game {
         }
 
         this.switchTurns();
-
-        // setTimeout(() => {
-            this.computerMove();
-        // }, 1000);
-        
+        this.computerMove();
         this.switchTurns();
 
         if (this.hasEnded()) {
@@ -67,12 +56,10 @@ class Game {
 
     playerMove(coordinates) {
         this.player.attack(coordinates, this.computer.gameboard);
-        // console.log(coordinates);
     }
 
     computerMove(coordinates = this.player.gameboard.getRandomCoordinates()) {
         this.computer.attack(coordinates, this.player.gameboard);
-        // console.log(coordinates);
     }
 
     switchTurns() {
@@ -94,14 +81,6 @@ class Game {
     }
 
     getGameResult() {
-        // let gameResultText = '';
-        // if (this.getWinnerName() === 'Computer') {
-        //     gameResultText = 'Better luck next time. Your enemy wins this game.';
-        // } else {
-        //     gameResultText = 'Great work captain: you won the game!';
-        // }
-        // return gameResultText;
-
         return this.getWinnerName() === 'Computer' ?
         'Better luck next time. Your enemy wins this game.' :
         'Great work captain: you won the game!';
