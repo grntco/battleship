@@ -4,27 +4,41 @@ const createGameSetupContainer = function() {
         const gameSetupContainer = document.createElement('div');
         gameSetupContainer.className = 'game-setup-container';
 
-        const createShipSetupContainer = function() {
-            const shipSetupContainer = gameSetupContainer.appendChild(document.createElement('div'));
-            shipSetupContainer.className = 'ship-setup-container';
+        const createWelcomeContainer = function() {
+            const welcomeContainer = document.createElement('div');
+            welcomeContainer.className = 'game-setup__welcome-container';
 
-            const placeShipsHeading = shipSetupContainer.appendChild(document.createElement('p'));
-            placeShipsHeading.className = 'ship-setup__place-ships-heading';
-            placeShipsHeading.textContent = 'Place your destroyer on the board:';
+            const heading = welcomeContainer.appendChild(document.createElement('h2'));
+            heading.className = 'game-setup__heading';
+            heading.textContent = 'Welcome, player!';
+    
+            const placeShipsText = welcomeContainer.appendChild(document.createElement('p'));
+            placeShipsText.className = 'game-setup__place-ships-text';
+            placeShipsText.textContent = 'Place your destroyer on the board:';
 
-            const shipContainer = shipSetupContainer.appendChild(document.createElement('div'));
-            shipContainer.className = 'ship-setup__ship-container';
+            const btnContainer = welcomeContainer.appendChild(document.createElement('div'));
+            btnContainer.className = 'game-setup__btn-container'
             
-            const rotateBtn = shipSetupContainer.appendChild(document.createElement('button'));
-            rotateBtn.className = 'ship-setup__rotate-btn';
-            rotateBtn.id = 'rotate-btn';
-            rotateBtn.textContent = 'Rotate';
+                const rotateBtn = btnContainer.appendChild(document.createElement('button'));
+                rotateBtn.className = 'game-setup__rotate-btn';
+                rotateBtn.id = 'rotate-btn';
+                rotateBtn.textContent = 'Rotate';
+                
+                const randomizeBtn = btnContainer.appendChild(document.createElement('button'));
+                randomizeBtn.className = 'game-setup__randomize-btn';
+                randomizeBtn.id = 'randomize-btn';
+                randomizeBtn.textContent = 'Randomize';
 
-            return shipSetupContainer;
+            return welcomeContainer;
         };
 
-        gameSetupContainer.appendChild(createShipSetupContainer());
-        gameSetupContainer.appendChild(createGrid());
+        gameSetupContainer.appendChild(createWelcomeContainer());
+
+        const grid = gameSetupContainer.appendChild(createGrid());
+        grid.classList.add('game-setup__grid');
+
+        const shipContainer = gameSetupContainer.appendChild(document.createElement('div'));
+        shipContainer.className = 'game-setup__ship-container';
 
         return gameSetupContainer;
     };

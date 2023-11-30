@@ -1,4 +1,4 @@
-import { createGameSetupContainer } from "./setup";
+import { createGameSetupContainer } from "./gameSetupContainer";
 
 const createWelcomeContainer = function() {
     const welcomeContainer = document.createElement('div');
@@ -10,7 +10,6 @@ const createWelcomeContainer = function() {
 
     // append all the things from setup
     welcomeContainer.appendChild(createGameSetupContainer());
-
 
     const startGameBtn = welcomeContainer.appendChild(document.createElement('button'));
     startGameBtn.textContent = 'Start Game';

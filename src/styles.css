@@ -108,7 +108,7 @@ h2 {
   align-items: center;
 }
 
-.welcome-container, 
+.game-setup-container, 
 .game-container, 
 .game-over-container {
   width: min(100%, 900px);
@@ -116,32 +116,23 @@ h2 {
   display: flex;
 }
 
-/* Welcome/Setup Page */
-
-.welcome-container {
-  flex-direction: column;
-}
+/* Game Setup Page */
 
 .game-setup-container {
-  display: flex;
   justify-content: space-between;
 }
 
-.ship-setup-container {
+.game-setup__btn-container {
+  margin-top: 16px;
   display: flex;
-  flex-direction: column;
+  gap: 8px;
 }
 
-.ship-setup__ship-container {
-  border: 2px solid var(--green);
+.game-setup__ship-container {
+  position: absolute;
   height: 32px;
   width: 32px;
-  /* flex-grow: 1; */
-  position: absolute;
-}
-
-.ship-setup__rotate-btn {
-  align-self: center;
+  border: 2px solid var(--green);
 }
 
 .start-game-btn {
