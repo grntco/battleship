@@ -9,6 +9,10 @@ export const events = (function() {
             DOMController.handleGridItemClick(target);
         }
 
+        if (target.id.match('play-again-btn')) {
+            DOMController.restartGame();
+        }
+
     });
 })();
 

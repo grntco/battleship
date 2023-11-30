@@ -2,6 +2,7 @@ import { Game } from "../app/game";
 import { getCoordinatesOfGridItem } from "../app/helpers/getCoordinatesOfGridItem";
 import { getGridItemFromCoordinates } from "../app/helpers/getGridItemFromCoordinates";
 import { createGameOverContainer } from "./components/gameOverContainer";
+import { createGameSetupContainer } from "./components/gameSetupContainer";
 import { createGrid } from "./components/grid";
 
 const DOMController = {
@@ -41,6 +42,10 @@ const DOMController = {
             this.updateContent(createGameOverContainer());
             this._displayGameResult();
         };
+    },
+
+    restartGame: function() {
+        this.updateContent(createGameSetupContainer());
     },
 
 
