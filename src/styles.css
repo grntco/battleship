@@ -208,7 +208,7 @@ h2 {
   height: 32px;
 }
 
-.grid-item:hover {
+.grid-container + .grid-container .grid .grid-item:hover {
   background-color: var(--bright-black);
   cursor: crosshair;
 }
