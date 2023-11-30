@@ -55,7 +55,7 @@ class Game {
         this.switchTurns();
 
         if (this.hasEnded()) {
-            console.log(this.gameOver());
+            console.log(this.getGameResult());
         }
     }
 
@@ -93,14 +93,18 @@ class Game {
         return this.player.gameboard.allShipsSunk() ? this.computer.name : this.player.name;
     }
 
-    gameOver() {
-        let gameOverText = '';
-        if (this.getWinnerName() === 'Computer') {
-            gameOverText = 'Better luck next time. Your enemy wins this game.';
-        } else {
-            gameOverText = 'Great work captain: you won the game!';
-        }
-        return gameOverText;
+    getGameResult() {
+        // let gameResultText = '';
+        // if (this.getWinnerName() === 'Computer') {
+        //     gameResultText = 'Better luck next time. Your enemy wins this game.';
+        // } else {
+        //     gameResultText = 'Great work captain: you won the game!';
+        // }
+        // return gameResultText;
+
+        return this.getWinnerName() === 'Computer' ?
+        'Better luck next time. Your enemy wins this game.' :
+        'Great work captain: you won the game!';
     }
 }
 

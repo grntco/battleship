@@ -1,6 +1,7 @@
 import { Game } from "../app/game";
 import { getCoordinatesOfGridItem } from "../app/helpers/getCoordinatesOfGridItem";
 import { getGridItemFromCoordinates } from "../app/helpers/getGridItemFromCoordinates";
+import { createGameOverContainer } from "./components/gameOverContainer";
 import { createGrid } from "./components/grid";
 
 const DOMController = {
@@ -31,8 +32,15 @@ const DOMController = {
         }
     },
 
-    displayGameOverModal: function() {
-        
+    displayGameOver: function() {
+        this._clearContent();
+        this._getContentSection().appendChild(createGameOverContainer());
+        this._displayGameResult();
+    },
+
+    _displayGameResult: function() {
+        const gameResult = document.querySelector('.game-over__game-result');
+        gameResult.textContent = this.game.getGameResult();
     },
 
     _updateGridTitles: function() {
@@ -42,13 +50,17 @@ const DOMController = {
 
         playerGridTitle.textContent = 'Your Board';
         computerGridTitle.textContent = 'Enemy Board';
-
     }, 
 
     handleGridItemClick: function(gridItem) {
         const coordinates = getCoordinatesOfGridItem(gridItem);
         this.game.playRound(coordinates);
         this._updateHitsAndMisses();
+        if (this.game.hasEnded()) this.displayGameOver();
+    },
+
+    _getContentSection: function() {
+        return document.querySelector('.content-section');
     },
 
     _displayShipsOnPlayerGrid: function() {
