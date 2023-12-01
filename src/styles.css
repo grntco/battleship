@@ -132,7 +132,13 @@ h2 {
   position: absolute;
   height: 32px;
   width: 32px;
-  border: 2px solid var(--green);
+  border: 2px solid var(--bright-green);
+  background-color: var(--green);
+  opacity: 0.8;
+}
+
+.game-setup__ship-container:hover {
+  cursor: pointer;
 }
 
 .start-game-btn {
