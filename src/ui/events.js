@@ -15,13 +15,14 @@ export const events = (function() {
 
     });
 
-    // this needs to be just on the grid-setup__grid
+    // this needs to be just on the game-setup__grid
+    // const gameSetupGrid = document.querySelector('.game-setup__grid');
     document.addEventListener('mousemove', handleShipFollowCursor);
 })();
 
 function handleShipFollowCursor(e) {
     const ship = document.querySelector('.game-setup__ship-container');
-    ship.style.left = e.pageX + 'px';
-    ship.style.top = e.pageY + 'px';
+    ship.style.left = e.pageX - 16 + 'px';
+    ship.style.top = e.pageY - 16 + 'px';
 }
 

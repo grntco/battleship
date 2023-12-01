@@ -6,8 +6,13 @@ import { createGameSetupContainer } from "./components/gameSetupContainer";
 import { createGrid } from "./components/grid";
 
 const DOMController = {
-    loadNewGame: function() {
+    initSetupPage: function() {
+        this.updateContent(createGameSetupContainer());
+        this.displayShipSetupContainer(5);
         this.game = new Game();
+    },
+
+    loadNewGame: function() {
         this.game.start();
         this.refreshGrids();
         this._displayShipsOnPlayerGrid();
@@ -34,6 +39,8 @@ const DOMController = {
     },
 
     // play the round
+    // Call this something else, 
+    // and then have a handle function in events that calls this for the click
     handleGridItemClick: function(gridItem) {
         const [x, y] = getCoordinatesOfGridItem(gridItem);
         this.game.playRound([x, y]);
@@ -48,6 +55,24 @@ const DOMController = {
         this.updateContent(createGameSetupContainer());
     },
 
+    displayShipSetupContainer: function(shipLength) {
+        // const shipLengths = [2, 2, 3, 3, 4, 5];
+        // if (!this.player.ships.some(ship => ship.coordinates.length === currentLength))
+
+        const shipContainer = document.querySelector('.game-setup__ship-container');
+        shipContainer.style.width = shipLength * 32 + 'px';
+    },
+
+    rotateShipContainer: function(shipLength) {
+        const shipContainer = document.querySelector('.game-setup__ship-container');
+        if (shipContainer.style.width > 32) {
+            shipContainer.style.width = '32px';
+            shipContainer.style.length = shipLength * 32 + 'px';
+        } else {
+            shipContainer.style.length = '32px';
+            shipContainer.style.width = shipLength * 32 + 'px';
+        }
+    },
 
     _clearContent: function() {
         const contentSection = document.querySelector('.content-section');

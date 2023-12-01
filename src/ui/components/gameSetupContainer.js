@@ -17,7 +17,7 @@ const createGameSetupContainer = function() {
             placeShipsText.textContent = 'Place your destroyer on the board:';
 
             const btnContainer = welcomeContainer.appendChild(document.createElement('div'));
-            btnContainer.className = 'game-setup__btn-container'
+            btnContainer.className = 'game-setup__btn-container';
             
                 const rotateBtn = btnContainer.appendChild(document.createElement('button'));
                 rotateBtn.className = 'game-setup__rotate-btn';
@@ -34,12 +34,12 @@ const createGameSetupContainer = function() {
 
         gameSetupContainer.appendChild(createWelcomeContainer());
 
-        const grid = gameSetupContainer.appendChild(createGrid());
-        grid.classList.add('game-setup__grid');
-
         const shipContainer = gameSetupContainer.appendChild(document.createElement('div'));
         shipContainer.className = 'game-setup__ship-container';
 
+        const grid = gameSetupContainer.appendChild(createGrid());
+        grid.classList.add('game-setup__grid');
+        
         return gameSetupContainer;
     };
 
