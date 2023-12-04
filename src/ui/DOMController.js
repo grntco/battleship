@@ -33,17 +33,6 @@ const DOMController = {
         if (this.game.hasEnded()) this.initGameOver();
     },
 
-    handleShipRotation: function() {
-        const shipContainer = document.querySelector('.game-setup__ship-container');
-        if (shipContainer.offsetWidth > 32) {
-            shipContainer.style.height = shipContainer.offsetWidth + 'px';
-            shipContainer.style.width = '32px';
-        } else {
-            shipContainer.style.width = shipContainer.offsetHeight + 'px';
-            shipContainer.style.height = '32px';
-        }
-    },
-
     renderPlacedShipOnBoard: function(gridItem) {
         const [x, y] = getCoordinatesOfGridItem(gridItem);
         const shipContainer = document.querySelector('.game-setup__ship-container');
