@@ -21,7 +21,7 @@ class Game {
     }
 
     start() {
-        // this.initRandomShips(this.player.gameboard);
+        this.initRandomShips(this.player.gameboard);
         this.initRandomShips(this.computer.gameboard);
         this.initPlayerTurn();
     }

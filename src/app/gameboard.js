@@ -111,6 +111,7 @@ class Gameboard {
                 adjacentCoordinates.push(adjacentTop, adjacentBottom);
             });
         } else if (start[0] === end[0]) { // if coordinates are vertical
+            // may need to switch back, and just reverse the allcoordinates on the shipplacement
             const before = [end[0], end[1] - 1];
             const after = [start[0], start[1] + 1];
 
@@ -124,7 +125,6 @@ class Gameboard {
             });
         }
         adjacentCoordinates = adjacentCoordinates.filter(([x, y]) => this._isInBounds([x, y]));
-        console.log(adjacentCoordinates);
         return adjacentCoordinates;
     }
 

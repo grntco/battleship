@@ -109,7 +109,7 @@ h2 {
 }
 
 .game-setup-container, 
-.game-container, 
+.game-play-container, 
 .game-over-container {
   width: min(100%, 900px);
   padding: 96px 48px;
@@ -151,7 +151,7 @@ h2 {
 
 /* Game Page */
 
-.game-container {
+.game-play-container {
   justify-content: space-between;
   gap: 16px;
   border: 1px solid var(--green);
@@ -286,7 +286,7 @@ h2 {
 }
 
 @media (max-width: 910px) {
-  .game-container {
+  .game-play-container {
     padding: none;
     border: none;
     flex-direction: column;
