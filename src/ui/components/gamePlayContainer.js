@@ -10,7 +10,6 @@ const createGamePlayContainer = function() {
 
         const gridTitle = document.createElement('h3');
         gridTitle.className = 'grid-container__title';
-        gridTitle.textContent = 'Board';
             
         const createAxis = function(type) {
             const axis = document.createElement('div');

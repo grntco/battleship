@@ -1,7 +1,7 @@
 import { Game } from "../app/game";
 import { getCoordinatesOfGridItem } from "../app/helpers/getCoordinatesOfGridItem";
 import { getGridItemFromCoordinates } from "../app/helpers/getGridItemFromCoordinates";
-import { createGamePlayContainer } from "./components/gameContainer";
+import { createGamePlayContainer } from "./components/gamePlayContainer";
 import { createGameOverContainer } from "./components/gameOverContainer";
 import { createGameSetupContainer } from "./components/gameSetupContainer";
 
@@ -17,7 +17,7 @@ const DOMController = {
         this.game.start();
         this._updatePageContent(createGamePlayContainer());
         this._updateBoards();
-        this._updateGridTitles();
+        this._displayGridTitles();
         // init gameplay events
     },
 
@@ -108,13 +108,10 @@ const DOMController = {
         }
     },
 
-    _updateGridTitles: function() {
-        const gridContainers = document.querySelectorAll('.grid-container');
-        const playerGridTitle = gridContainers[0].querySelector('.grid-container__title');
-        const computerGridTitle = gridContainers[1].querySelector('.grid-container__title');
-
-        playerGridTitle.textContent = 'Your Board';
-        computerGridTitle.textContent = 'Enemy Board';
+    _displayGridTitles: function() {
+        const titles = document.querySelectorAll('.grid-container__title');
+        titles[0].textContent = 'You';
+        titles[1].textContent = 'Enemy';
     },
 };
 
