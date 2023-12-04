@@ -9,10 +9,6 @@ class Gameboard {
     }
 
     placeShip(...coordinates) {
-        // if (coordinates.some(([x, y]) => !this._isInBounds([x, y]))) {
-        //     throw new Error('Please provide accurate coordinates.');
-        // }
-
         if (this._arePlaceable(coordinates)) {
             const shipLength = coordinates.length;
             const newShip = new Ship(shipLength);
@@ -27,7 +23,7 @@ class Gameboard {
             });
             this.ships.push(newShip);
         } else {
-            console.log(coordinates);
+            console.log('unable to place');
             // throw new Error('Please provide accurate coordinates.');
         }        
     }

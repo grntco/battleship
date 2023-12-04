@@ -15,7 +15,8 @@ const DOMController = {
     loadNewGame: function() {
         this.game.start();
         this.refreshGrids();
-        this._displayShipsOnPlayerGrid();
+        // this._displayShipsOnPlayerGrid();
+        this.updateBoards();
         this._updateGridTitles();
     },
 
@@ -44,7 +45,8 @@ const DOMController = {
     handleGridItemClick: function(gridItem) {
         const [x, y] = getCoordinatesOfGridItem(gridItem);
         this.game.playRound([x, y]);
-        this._updateHitsAndMisses();
+        // was updateHitsAndMisses below
+        this.updateBoards();
         if (this.game.hasEnded()) {
             this.updateContent(createGameOverContainer());
             this._displayGameResult();
@@ -71,11 +73,8 @@ const DOMController = {
         }
 
         this.game.player.gameboard.placeShip(...allCoordinates);
-        
-        // console.log(allCoordinates);
-        // check whether they are all in the board or not bumping into other ships
-        // if true, place the ship on the setup (player) board and render it somehow
-
+        this.updateBoards();
+        this.displayShipSetupContainer();
     },
 
     restartGame: function() {
@@ -91,6 +90,36 @@ const DOMController = {
             if (i === alreadyPlacedShips.length) {
                 shipContainer.style.width = shipLengths[i] * 32 + 'px';
             }
+        }
+    },
+
+    updateBoards: function() {
+        const grids = document.querySelectorAll('.grid');
+        const gameboards = grids.length > 1 ? [this.game.player.gameboard, this.game.computer.gameboard] : [this.game.player.gameboard];
+
+        for (let i = 0; i < grids.length; i++) {
+            gameboards[i].ships.forEach(ship => {
+
+                ship.coordinates.forEach(([x, y]) => {
+                    const gridItem = getGridItemFromCoordinates([x, y], grids[i]);
+                    console.log(gridItem);
+                    gridItem.classList.add('grid-item__ship');
+                });
+            });
+
+            gameboards[i].hitShots.forEach(([x, y]) => {
+                const gridItem = getGridItemFromCoordinates([x, y], grids[i]);
+                if (!gridItem.classList.contains('grid-item__hit')) {
+                    gridItem.classList.add('grid-item__hit');
+                }
+            });
+
+            gameboards[i].missedShots.forEach(([x, y]) => {
+                const gridItem = getGridItemFromCoordinates([x, y], grids[i]);
+                if (!gridItem.classList.contains('grid-item__miss')) {
+                    gridItem.classList.add('grid-item__miss');
+                }
+            });
         }
     },
 
@@ -122,42 +151,44 @@ const DOMController = {
 
         playerGridTitle.textContent = 'Your Board';
         computerGridTitle.textContent = 'Enemy Board';
-    }, 
-
-    _displayShipsOnPlayerGrid: function() {
-        const playerAllGridItems = [...document.querySelectorAll('.grid')][0].children;
-        const playerGameboard = this.game.player.gameboard;
-
-        for (let i = 0; i < playerAllGridItems.length; i++) {
-            const [x, y] = getCoordinatesOfGridItem(playerAllGridItems[i]);
-            for (let j = 0; j < playerGameboard.ships.length; j++) {
-                if (playerGameboard.areCoordinatesInArray([x, y], playerGameboard.ships[j].coordinates)) {
-                    playerAllGridItems[i].classList.add('grid-item__ship');
-                }
-            }
-        }
     },
 
-    _updateHitsAndMisses: function() {
-        const gridContainers = document.querySelectorAll('.grid-container');
-        const gameboards = [this.game.player.gameboard, this.game.computer.gameboard];
+    // don't need, use updateBoards
+    // _displayShipsOnPlayerGrid: function() {
+    //     const playerAllGridItems = [...document.querySelectorAll('.grid')][0].children;
+    //     const playerGameboard = this.game.player.gameboard;
 
-        for (let i = 0; i < 2; i++) {
-            gameboards[i].hitShots.forEach(([x, y]) => {
-                const gridItem = getGridItemFromCoordinates([x, y], gridContainers[i]);
-                if (!gridItem.classList.contains('grid-item__hit')) {
-                    gridItem.classList.add('grid-item__hit');
-                }
-            });
+    //     for (let i = 0; i < playerAllGridItems.length; i++) {
+    //         const [x, y] = getCoordinatesOfGridItem(playerAllGridItems[i]);
+    //         for (let j = 0; j < playerGameboard.ships.length; j++) {
+    //             if (playerGameboard.areCoordinatesInArray([x, y], playerGameboard.ships[j].coordinates)) {
+    //                 playerAllGridItems[i].classList.add('grid-item__ship');
+    //             }
+    //         }
+    //     }
+    // },
 
-            gameboards[i].missedShots.forEach(([x, y]) => {
-                const gridItem = getGridItemFromCoordinates([x, y], gridContainers[i]);
-                if (!gridItem.classList.contains('grid-item__miss')) {
-                    gridItem.classList.add('grid-item__miss');
-                }
-            });
-        } 
-    },
+    // don't need, use updateBoards
+    // _updateHitsAndMisses: function() {
+    //     const grids = document.querySelectorAll('.grid');
+    //     const gameboards = [this.game.player.gameboard, this.game.computer.gameboard];
+
+    //     for (let i = 0; i < 2; i++) {
+    //         gameboards[i].hitShots.forEach(([x, y]) => {
+    //             const gridItem = getGridItemFromCoordinates([x, y], grids[i]);
+    //             if (!gridItem.classList.contains('grid-item__hit')) {
+    //                 gridItem.classList.add('grid-item__hit');
+    //             }
+    //         });
+
+    //         gameboards[i].missedShots.forEach(([x, y]) => {
+    //             const gridItem = getGridItemFromCoordinates([x, y], grids[i]);
+    //             if (!gridItem.classList.contains('grid-item__miss')) {
+    //                 gridItem.classList.add('grid-item__miss');
+    //             }
+    //         });
+    //     } 
+    // },
 };
 
 export { DOMController };
