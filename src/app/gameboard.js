@@ -9,23 +9,27 @@ class Gameboard {
     }
 
     placeShip(...coordinates) {
-        if (coordinates.some(([x, y]) => !this._isInBounds([x, y]))) {
-            throw new Error('Please provide accurate coordinates.');
-        }
+        // if (coordinates.some(([x, y]) => !this._isInBounds([x, y]))) {
+        //     throw new Error('Please provide accurate coordinates.');
+        // }
 
-        const shipLength = coordinates.length;
-        const newShip = new Ship(shipLength);
+        if (this._arePlaceable(coordinates)) {
+            const shipLength = coordinates.length;
+            const newShip = new Ship(shipLength);
 
-        coordinates.forEach(([x, y]) => {
-            const node = this.graph[x][y];
+            coordinates.forEach(([x, y]) => {
+                const node = this.graph[x][y];
 
-            if (!node.hasShip) {
-                node.hasShip = true;
-                newShip.coordinates.push([x, y]);
-            }
-        });
-
-        this.ships.push(newShip);
+                if (!node.hasShip) {
+                    node.hasShip = true;
+                    newShip.coordinates.push([x, y]);
+                }
+            });
+            this.ships.push(newShip);
+        } else {
+            console.log(coordinates);
+            // throw new Error('Please provide accurate coordinates.');
+        }        
     }
 
     receiveAttack([x, y]) {
@@ -65,6 +69,8 @@ class Gameboard {
             let start = this.getRandomCoordinates();
             while (directionIndex < directions.length) {
                 let allCoordinates = this.getRestOfCoordinates(start, length, directions[directionIndex]);
+
+                // USE _arePlaceable!!! This is disgusting
                 if (allCoordinates.every(([x, y]) => this._isInBounds([x, y]))) {
                     if (allCoordinates.every(([x, y]) => !this._hasShip([x, y]))) {
                         if (this.getAdjacentCoordinates(allCoordinates).every(([x, y]) => !this._hasShip([x, y]))) {
@@ -144,6 +150,12 @@ class Gameboard {
         }
 
         return graph;
+    }
+
+    _arePlaceable(coordinates) {
+        return coordinates.every(([x, y]) => {
+            return this._isInBounds([x, y]) && !this._hasShip([x, y]);
+        }) && this.getAdjacentCoordinates(coordinates).every(([x, y]) => !this._hasShip([x, y]));
     }
 
     _hasShip([x, y]) {

@@ -135,6 +135,7 @@ h2 {
   border: 2px solid var(--bright-green);
   background-color: var(--green);
   opacity: 0.8;
+  pointer-events: none;
 }
 
 .game-setup__ship-container:hover {

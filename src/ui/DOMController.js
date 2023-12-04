@@ -7,9 +7,9 @@ import { createGrid } from "./components/grid";
 
 const DOMController = {
     initSetupPage: function() {
-        this.updateContent(createGameSetupContainer());
-        this.displayShipSetupContainer(5);
         this.game = new Game();
+        this.updateContent(createGameSetupContainer());
+        this.displayShipSetupContainer();
     },
 
     loadNewGame: function() {
@@ -51,16 +51,47 @@ const DOMController = {
         };
     },
 
+    renderPlacedShipOnBoard: function(gridItem) {
+        const [x, y] = getCoordinatesOfGridItem(gridItem);
+        const shipContainer = document.querySelector('.game-setup__ship-container');
+        const shipLength = shipContainer.offsetWidth / 32;
+        let allCoordinates = [];
+        console.log(shipLength);
+
+        // I think this will only work if the first item of the rotation is where the mouse is
+        if (shipLength === 1) { // vertical placement
+            // allCoordinates = 
+            for (let i = 0; i < shipLength; i++) {
+                allCoordinates.push([x, y + i]);
+            }
+        } else { // horizontal placement
+            for (let i = 0; i < shipLength; i++) {
+                allCoordinates.push([x + i, y]); 
+            }
+        }
+
+        this.game.player.gameboard.placeShip(...allCoordinates);
+        
+        // console.log(allCoordinates);
+        // check whether they are all in the board or not bumping into other ships
+        // if true, place the ship on the setup (player) board and render it somehow
+
+    },
+
     restartGame: function() {
         this.updateContent(createGameSetupContainer());
     },
 
-    displayShipSetupContainer: function(shipLength) {
-        // const shipLengths = [2, 2, 3, 3, 4, 5];
-        // if (!this.player.ships.some(ship => ship.coordinates.length === currentLength))
-
+    displayShipSetupContainer: function() {
+        const alreadyPlacedShips = this.game.player.gameboard.ships;
+        const shipLengths = [5, 4, 3, 3, 2, 2];
         const shipContainer = document.querySelector('.game-setup__ship-container');
-        shipContainer.style.width = shipLength * 32 + 'px';
+
+        for (let i = 0; i < shipLengths.length; i++) {
+            if (i === alreadyPlacedShips.length) {
+                shipContainer.style.width = shipLengths[i] * 32 + 'px';
+            }
+        }
     },
 
     rotateShipContainer: function(shipLength) {
