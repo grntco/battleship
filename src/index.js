@@ -7,3 +7,4 @@ document.body.appendChild(createMainContainer());
 
 DOMController.initGameSetup();
 DOMController.initGamePlay();
+DOMController.initGameOver();

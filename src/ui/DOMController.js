@@ -19,13 +19,12 @@ const DOMController = {
         this._updatePageContent(createGamePlayContainer());
         this._updateBoards();
         this._displayGridTitles();
-        // init gameplay events
         initEventListeners.gamePlayEvents();
     },
 
     initGameOver: function() {
         this._updatePageContent(createGameOverContainer(this.game.getGameResult()));
-        // init game over events
+        initEventListeners.gameOverEvents();
     },
 
     displayGamePlayRound: function(gridItem) {
