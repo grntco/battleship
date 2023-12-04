@@ -4,10 +4,10 @@ export const events = (function() {
     document.addEventListener('click', function(e) {
         const target = e.target;
 
-        if (target.classList.contains('grid-item') 
-        && [...[...document.querySelectorAll('.grid')][1].children].includes(target)) {
-            handleGridItemClick(target);
-        }
+        // if (target.classList.contains('grid-item') 
+        // && [...[...document.querySelectorAll('.grid')][1].children].includes(target)) {
+        //     handleGridItemClick(target);
+        // }
 
         // if (target.classList.contains('grid-item')) {
         //     DOMController.renderPlacedShipOnBoard(target);
@@ -45,8 +45,8 @@ function handleShipRotation() {
     }
 }
 
-function handleGridItemClick(e) {
-    DOMController.displayGamePlayRound(e);
+function handleEnemyGridClick(e) {
+    DOMController.displayGamePlayRound(e.target);
 }
 
 // initGameSetupEvents
@@ -66,5 +66,16 @@ function handleGridItemClick(e) {
 
 // initGamePlayEvents
 
-// initGameOverEvents
+export const initEventListeners = {
+    // gameSetupEvents
+
+    gamePlayEvents: function() {
+        const enemyGridItems = [...document.querySelectorAll('.grid')[1].children];
+        enemyGridItems.forEach(gridItem => {
+            gridItem.addEventListener('click', handleEnemyGridClick);
+        });
+    },
+
+    // gameOverEven
+};
 

@@ -4,6 +4,7 @@ import { getGridItemFromCoordinates } from "../app/helpers/getGridItemFromCoordi
 import { createGamePlayContainer } from "./components/gamePlayContainer";
 import { createGameOverContainer } from "./components/gameOverContainer";
 import { createGameSetupContainer } from "./components/gameSetupContainer";
+import { initEventListeners } from "./events";
 
 const DOMController = {
     initGameSetup: function() {
@@ -19,6 +20,7 @@ const DOMController = {
         this._updateBoards();
         this._displayGridTitles();
         // init gameplay events
+        initEventListeners.gamePlayEvents();
     },
 
     initGameOver: function() {
