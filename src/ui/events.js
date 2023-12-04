@@ -18,7 +18,7 @@ export const events = (function() {
         }
 
         if (target.id.match('rotate-btn')) {
-            DOMController.handleShipRotation();
+            handleShipRotation();
         }
 
     });
@@ -54,6 +54,17 @@ function handleShipFollowCursor(e) {
     ship.style.left = e.pageX - 16 + 'px';
     ship.style.top = e.pageY - 16 + 'px';
 };
+
+function handleShipRotation() {
+    const shipContainer = document.querySelector('.game-setup__ship-container');
+    if (shipContainer.offsetWidth > 32) {
+        shipContainer.style.height = shipContainer.offsetWidth + 'px';
+        shipContainer.style.width = '32px';
+    } else {
+        shipContainer.style.width = shipContainer.offsetHeight + 'px';
+        shipContainer.style.height = '32px';
+    }
+}
 
 function handleGridItemClick(e) {
     DOMController.displayGamePlayRound(e);

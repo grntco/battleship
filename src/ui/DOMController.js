@@ -8,21 +8,21 @@ import { createGameSetupContainer } from "./components/gameSetupContainer";
 const DOMController = {
     initGameSetup: function() {
         this.game = new Game();
-        this._updateContent(createGameSetupContainer());
+        this._updatePageContent(createGameSetupContainer());
         this.displayShipSetupContainer();
         // init setup events
     },
 
     initGamePlay: function() {
         this.game.start();
-        this._updateContent(createGamePlayContainer());
+        this._updatePageContent(createGamePlayContainer());
         this._updateBoards();
         this._updateGridTitles();
         // init gameplay events
     },
 
     initGameOver: function() {
-        this._updateContent(createGameOverContainer(this.game.getGameResult()));
+        this._updatePageContent(createGameOverContainer(this.game.getGameResult()));
         // init game over events
     },
 
@@ -85,7 +85,7 @@ const DOMController = {
         }
     },
 
-    _updateContent: function(newContentFunc) {
+    _updatePageContent: function(newContentFunc) {
         const contentSection = document.querySelector('.content-section');
         contentSection.innerHTML = '';
         contentSection.appendChild(newContentFunc);  
