@@ -33,12 +33,6 @@ const DOMController = {
         if (this.game.hasEnded()) this.initGameOver();
     },
 
-    _updateContent: function(newContentFunc) {
-        const contentSection = document.querySelector('.content-section');
-        this._clearContent();
-        contentSection.appendChild(newContentFunc);  
-    },
-
     handleShipRotation: function() {
         const shipContainer = document.querySelector('.game-setup__ship-container');
         if (shipContainer.offsetWidth > 32) {
@@ -91,6 +85,12 @@ const DOMController = {
         }
     },
 
+    _updateContent: function(newContentFunc) {
+        const contentSection = document.querySelector('.content-section');
+        contentSection.innerHTML = '';
+        contentSection.appendChild(newContentFunc);  
+    },
+
     _updateBoards: function() {
         const grids = document.querySelectorAll('.grid');
         const gameboards = grids.length > 1 ? [this.game.player.gameboard, this.game.computer.gameboard] : [this.game.player.gameboard];
@@ -117,11 +117,6 @@ const DOMController = {
                 }
             });
         }
-    },
-
-    _clearContent: function() {
-        const contentSection = document.querySelector('.content-section');
-        contentSection.innerHTML = '';
     },
 
     _updateGridTitles: function() {
