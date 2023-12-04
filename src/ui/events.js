@@ -17,6 +17,10 @@ export const events = (function() {
             DOMController.restartGame();
         }
 
+        if (target.id.match('rotate-btn')) {
+            DOMController.rotateShipContainer();
+        }
+
     });
 
     // this needs to be just on the game-setup__grid

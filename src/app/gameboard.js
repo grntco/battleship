@@ -111,8 +111,8 @@ class Gameboard {
                 adjacentCoordinates.push(adjacentTop, adjacentBottom);
             });
         } else if (start[0] === end[0]) { // if coordinates are vertical
-            const before = [start[0], start[1] - 1];
-            const after = [end[0], end[1] + 1];
+            const before = [end[0], end[1] - 1];
+            const after = [start[0], start[1] + 1];
 
             adjacentCoordinates.push(before, after);
 
@@ -124,6 +124,7 @@ class Gameboard {
             });
         }
         adjacentCoordinates = adjacentCoordinates.filter(([x, y]) => this._isInBounds([x, y]));
+        console.log(adjacentCoordinates);
         return adjacentCoordinates;
     }
 

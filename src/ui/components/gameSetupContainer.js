@@ -14,7 +14,7 @@ const createGameSetupContainer = function() {
     
             const placeShipsText = welcomeContainer.appendChild(document.createElement('p'));
             placeShipsText.className = 'game-setup__place-ships-text';
-            placeShipsText.textContent = 'Place your destroyer on the board:';
+            placeShipsText.textContent = 'Place your ships on the board:';
 
             const btnContainer = welcomeContainer.appendChild(document.createElement('div'));
             btnContainer.className = 'game-setup__btn-container';

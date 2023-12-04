@@ -56,21 +56,22 @@ const DOMController = {
     renderPlacedShipOnBoard: function(gridItem) {
         const [x, y] = getCoordinatesOfGridItem(gridItem);
         const shipContainer = document.querySelector('.game-setup__ship-container');
-        const shipLength = shipContainer.offsetWidth / 32;
-        let allCoordinates = [];
-        console.log(shipLength);
 
-        // I think this will only work if the first item of the rotation is where the mouse is
-        if (shipLength === 1) { // vertical placement
-            // allCoordinates = 
+        let shipLength = 0;
+        let allCoordinates = [];
+
+        if (shipContainer.offsetWidth === 32) { // vertical placement        
+            shipLength = shipContainer.offsetHeight / 32;
             for (let i = 0; i < shipLength; i++) {
-                allCoordinates.push([x, y + i]);
+                allCoordinates.push([x, y - i]);
             }
         } else { // horizontal placement
+            shipLength = shipContainer.offsetWidth / 32;
             for (let i = 0; i < shipLength; i++) {
                 allCoordinates.push([x + i, y]); 
             }
         }
+        console.log(allCoordinates);
 
         this.game.player.gameboard.placeShip(...allCoordinates);
         this.updateBoards();
@@ -89,6 +90,7 @@ const DOMController = {
         for (let i = 0; i < shipLengths.length; i++) {
             if (i === alreadyPlacedShips.length) {
                 shipContainer.style.width = shipLengths[i] * 32 + 'px';
+                shipContainer.style.height = '32px';
             }
         }
     },
@@ -102,7 +104,6 @@ const DOMController = {
 
                 ship.coordinates.forEach(([x, y]) => {
                     const gridItem = getGridItemFromCoordinates([x, y], grids[i]);
-                    console.log(gridItem);
                     gridItem.classList.add('grid-item__ship');
                 });
             });
@@ -123,14 +124,14 @@ const DOMController = {
         }
     },
 
-    rotateShipContainer: function(shipLength) {
+    rotateShipContainer: function() {
         const shipContainer = document.querySelector('.game-setup__ship-container');
-        if (shipContainer.style.width > 32) {
+        if (shipContainer.offsetWidth > 32) {
+            shipContainer.style.height = shipContainer.offsetWidth + 'px';
             shipContainer.style.width = '32px';
-            shipContainer.style.length = shipLength * 32 + 'px';
         } else {
-            shipContainer.style.length = '32px';
-            shipContainer.style.width = shipLength * 32 + 'px';
+            shipContainer.style.width = shipContainer.offsetHeight + 'px';
+            shipContainer.style.height = '32px';
         }
     },
 
