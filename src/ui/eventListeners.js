@@ -18,8 +18,6 @@ export const eventListeners = {
         });
     },
 
-    // start btn?
-
     initGamePlayEvents: function() {
         const enemyGridItems = [...document.querySelectorAll('.grid')[1].children];
         enemyGridItems.forEach(gridItem => {
