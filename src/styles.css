@@ -19,7 +19,7 @@
   --bright-white: rgb(255, 255, 255);
 }
 
-/* Font from Fontshare: JetBrains */
+/* Font from Fontshare: JetBrains Mono */
 @font-face {
   font-family: 'JetBrains Mono';
   font-weight: 400;
@@ -109,6 +109,14 @@ h2 {
   margin-top: 16px;
   display: flex;
   gap: 8px;
+}
+
+.game-setup__place-ships-text::after {
+  content: "";
+  margin-left: 2px;
+  padding: 0px 4px;
+  background-color: var(--bright-green);
+  animation: blink 1.25s steps(1) infinite;
 }
 
 .game-setup__ship-container {
@@ -239,6 +247,12 @@ h2 {
 
 .footer__gh-link__gh-icon {
   height: 1.3rem;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 @keyframes pulse {
