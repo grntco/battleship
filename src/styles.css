@@ -105,6 +105,10 @@ h2 {
 
 /* Game Setup Page */
 
+.game-setup-container:hover {
+  cursor: pointer;
+}
+
 .game-setup__btn-container {
   margin-top: 16px;
   display: flex;
@@ -127,10 +131,6 @@ h2 {
   background-color: var(--green);
   opacity: 0.8;
   pointer-events: none;
-}
-
-.game-setup__ship-container:hover {
-  cursor: pointer;
 }
 
 .start-game-btn {
