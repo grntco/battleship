@@ -4,7 +4,7 @@ import { getGridItemFromCoordinates } from "../app/helpers/getGridItemFromCoordi
 import { createGamePlayContainer } from "./components/gamePlayContainer";
 import { createGameOverContainer } from "./components/gameOverContainer";
 import { createGameSetupContainer } from "./components/gameSetupContainer";
-import { initEventListeners } from "./events";
+import { eventListeners } from "./eventListeners";
 
 const DOMController = {
     initGameSetup: function() {
@@ -19,12 +19,12 @@ const DOMController = {
         this._updatePageContent(createGamePlayContainer());
         this._updateBoards();
         this._displayGridTitles();
-        initEventListeners.gamePlayEvents();
+        eventListeners.initGamePlayEvents();
     },
 
     initGameOver: function() {
         this._updatePageContent(createGameOverContainer(this.game.getGameResult()));
-        initEventListeners.gameOverEvents();
+        eventListeners.initGameOverEvents();
     },
 
     displayGamePlayRound: function(gridItem) {

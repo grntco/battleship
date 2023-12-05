@@ -1,7 +1,8 @@
 import { eventHandlers } from "./eventHandlers";
 // document.addEventListener('mousemove', handleShipFollowCursor);
 
-export const initEventListeners = {
+// rename to just eventListeners
+export const eventListeners = {
 
     // initGameSetupEvents
     // function initGameSetupEvents() {
@@ -17,14 +18,16 @@ export const initEventListeners = {
     //     });
     // }
 
-    gamePlayEvents: function() {
+
+    // rename to inits
+    initGamePlayEvents: function() {
         const enemyGridItems = [...document.querySelectorAll('.grid')[1].children];
         enemyGridItems.forEach(gridItem => {
             gridItem.addEventListener('click', eventHandlers.enemyGridClick);
         });
     },
 
-    gameOverEvents: function() {
+    initGameOverEvents: function() {
         const playAgainBtn = document.getElementById('play-again-btn');
         playAgainBtn.addEventListener('click', eventHandlers.playAgainBtnClick);
     },
