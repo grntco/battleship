@@ -10,14 +10,10 @@ class Game {
         this.player.turn = true;
     }
 
-    // Will change this later...
-    initRandomShips(gameboard) { 
-        gameboard.placeShip(...gameboard.getRandomShipCoordinates(5));
-        gameboard.placeShip(...gameboard.getRandomShipCoordinates(4));
-        gameboard.placeShip(...gameboard.getRandomShipCoordinates(3));
-        gameboard.placeShip(...gameboard.getRandomShipCoordinates(3));
-        gameboard.placeShip(...gameboard.getRandomShipCoordinates(2));
-        gameboard.placeShip(...gameboard.getRandomShipCoordinates(2));
+    initRandomShips(gameboard) {
+        gameboard.shipLengths.forEach(length => {
+            gameboard.placeShip(...gameboard.getRandomShipCoordinates(length));
+        });
     }
 
     start() {
