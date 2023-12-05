@@ -102,23 +102,21 @@ h2 {
 .content-section {
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .game-setup-container, 
 .game-play-container, 
 .game-over-container {
-  width: min(100%, 900px);
-  padding: 96px 48px;
+  width: 100%;
+  padding: 96px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  border: 1px solid red;
 }
 
 /* Game Setup Page */
-
-.game-setup-container {
-  justify-content: space-between;
-}
 
 .game-setup__btn-container {
   margin-top: 16px;
@@ -147,13 +145,7 @@ h2 {
   align-self: center;
 }
 
-/* Game Page */
-
-.game-play-container {
-  justify-content: space-between;
-  gap: 16px;
-  border: 1px solid var(--green);
-}
+/* Game Play Page */
 
 .grid-container {
   display: grid;
@@ -235,15 +227,10 @@ h2 {
 
 .game-over-container {
   flex-direction: column;
-  align-items: center;
 }
 
 .game-over__game-result {
   text-align: center;
-}
-
-.game-over__play-again-btn {
-  margin-top: 96px;
 }
 
 /* Footer */
