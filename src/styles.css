@@ -22,21 +22,9 @@
 /* Font from Fontshare: JetBrains */
 @font-face {
   font-family: 'JetBrains Mono';
-  font-weight: 200;
-  src: url('./ui/assets/fonts/JetBrainsMono-ExtraLight.woff2') format('woff2'),
-       url('./ui/assets/fonts/JetBrainsMono-ExtraLight.woff') format('woff');
-}
-@font-face {
-  font-family: 'JetBrains Mono';
   font-weight: 400;
   src: url('./ui/assets/fonts/JetBrainsMono-Regular.woff2') format('woff2'),
        url('./ui/assets/fonts/JetBrainsMono-Regular.woff') format('woff');
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-weight: 700;
-  src: url('./ui/assets/fonts/JetBrainsMono-Bold.woff2') format('woff2'),
-       url('./ui/assets/fonts/JetBrainsMono-Bold.woff') format('woff');
 }
 @font-face {
   font-family: 'JetBrains Mono';
