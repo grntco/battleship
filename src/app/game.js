@@ -1,6 +1,6 @@
 import { Player } from "./player";
 
-class Game {
+export class Game {
     constructor() {
         this.player = new Player('Player');
         this.computer = new Player('Computer');
@@ -76,5 +76,3 @@ class Game {
         'Great work captain: you won the game!';
     }
 }
-
-export { Game };

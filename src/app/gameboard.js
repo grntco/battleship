@@ -1,6 +1,6 @@
 import { Ship } from "./ship";
 
-class Gameboard {
+export class Gameboard {
     constructor() {
         this.graph = this._createGraph();
         this.shipLengths = [5, 4, 3, 3, 2, 2];
@@ -169,5 +169,3 @@ class Gameboard {
         );
     }
 }
-
-export { Gameboard };
