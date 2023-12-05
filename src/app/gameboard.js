@@ -59,7 +59,7 @@ class Gameboard {
     }
 
     getRandomShipCoordinates(length) {
-        const directions = [[0, 1], [1, 0]];
+        const directions = [[0, -1], [1, 0]];
         let directionIndex = 0;
 
         while (directionIndex === 0) {
@@ -67,14 +67,10 @@ class Gameboard {
             while (directionIndex < directions.length) {
                 let allCoordinates = this.getRestOfCoordinates(start, length, directions[directionIndex]);
 
-                // USE _arePlaceable!!! This is disgusting
-                if (allCoordinates.every(([x, y]) => this._isInBounds([x, y]))) {
-                    if (allCoordinates.every(([x, y]) => !this._hasShip([x, y]))) {
-                        if (this.getAdjacentCoordinates(allCoordinates).every(([x, y]) => !this._hasShip([x, y]))) {
-                            return allCoordinates;
-                        }
-                    }
+                if (this._arePlaceable(allCoordinates)) {
+                    return allCoordinates;
                 }
+
                 directionIndex++;
             }
             directionIndex = 0;
