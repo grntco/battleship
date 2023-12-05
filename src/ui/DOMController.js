@@ -34,7 +34,7 @@ const DOMController = {
         if (this.game.hasEnded()) this.initGameOver();
     },
 
-    displayPlacedShipOnBoard: function(gridItem) {
+    displayManualPlacedShipOnBoard: function(gridItem) {
         const [x, y] = getCoordinatesOfGridItem(gridItem);
         const shipContainer = document.querySelector('.game-setup__ship-container');
         const playerGameboard = this.game.player.gameboard;
@@ -53,6 +53,12 @@ const DOMController = {
 
         allCoordinates = playerGameboard.getRestOfCoordinates([x, y], shipLength, direction);
         playerGameboard.placeShip(...allCoordinates);
+        this._updateBoards();
+    },
+
+    displayRandomPlacedShipOnBoard: function() {
+        const playerGameboard = this.game.player.gameboard;
+        playerGameboard.placeShip(...playerGameboard.getRandomShipCoordinates(playerGameboard.moveToNextShipLength()));
         this._updateBoards();
     },
 

@@ -20,13 +20,15 @@ export const eventHandlers = {
     },
 
     clickToPlaceShip: function(e) {
-        DOMController.displayPlacedShipOnBoard(e.target);
+        DOMController.displayManualPlacedShipOnBoard(e.target);
         DOMController.displayShipSetupContainer();
     },
 
-    // randomize
-
-
+    clickToPlaceRandomShip: function() {
+        DOMController.displayRandomPlacedShipOnBoard();
+        DOMController.displayShipSetupContainer();
+    },
+ 
     // Game Play Handlers
     clickToAttackEnemy: function(e) {
         DOMController.displayGamePlayRound(e.target);
