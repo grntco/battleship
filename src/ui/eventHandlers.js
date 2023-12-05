@@ -2,7 +2,7 @@ import { DOMController } from "./DOMController";
 
 export const eventHandlers = {
     // Game Setup Handlers
-    mouseMoveToDragShip: function(e) {
+    moveMouseToDragShip: function(e) {
         const ship = document.querySelector('.game-setup__ship-container');
         ship.style.left = e.pageX - 16 + 'px';
         ship.style.top = e.pageY - 16 + 'px';
@@ -20,7 +20,8 @@ export const eventHandlers = {
     },
 
     clickToPlaceShip: function(e) {
-        DOMController.renderPlacedShipOnBoard(e.target);
+        DOMController.displayPlacedShipOnBoard(e.target);
+        DOMController.displayShipSetupContainer();
     },
 
     // randomize

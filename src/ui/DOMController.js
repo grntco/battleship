@@ -34,29 +34,26 @@ const DOMController = {
         if (this.game.hasEnded()) this.initGameOver();
     },
 
-    renderPlacedShipOnBoard: function(gridItem) {
+    displayPlacedShipOnBoard: function(gridItem) {
         const [x, y] = getCoordinatesOfGridItem(gridItem);
-        console.log([x, y]);
         const shipContainer = document.querySelector('.game-setup__ship-container');
+        const playerGameboard = this.game.player.gameboard;
 
         let shipLength = 0;
         let allCoordinates = [];
+        let direction = [];
 
-        if (shipContainer.offsetWidth === 32) { // vertical placement        
-            shipLength = shipContainer.offsetHeight / 32;
-            for (let i = 0; i < shipLength; i++) {
-                allCoordinates.push([x, y - i]);
-            }
-        } else { // horizontal placement
+        if (shipContainer.offsetWidth !== 32) { // horizontal placement
             shipLength = shipContainer.offsetWidth / 32;
-            for (let i = 0; i < shipLength; i++) {
-                allCoordinates.push([x + i, y]); 
-            }
+            direction = [1, 0];    
+        } else { // vertical placement    
+            shipLength = shipContainer.offsetHeight / 32;
+            direction = [0, -1];
         }
 
-        this.game.player.gameboard.placeShip(...allCoordinates);
+        allCoordinates = playerGameboard.getRestOfCoordinates([x, y], shipLength, direction);
+        playerGameboard.placeShip(...allCoordinates);
         this._updateBoards();
-        this.displayShipSetupContainer();
     },
 
     displayShipSetupContainer: function() {

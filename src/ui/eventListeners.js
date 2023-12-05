@@ -3,7 +3,7 @@ import { eventHandlers } from "./eventHandlers";
 export const eventListeners = {
 
     initGameSetupEvents: function() {
-        document.addEventListener('mousemove', eventHandlers.mouseMoveToDragShip);
+        document.addEventListener('mousemove', eventHandlers.moveMouseToDragShip);
 
         const rotateBtn = document.getElementById('rotate-btn');
         rotateBtn.addEventListener('click', eventHandlers.clickToRotateShip);
