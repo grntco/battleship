@@ -75,7 +75,7 @@ button:hover {
 }
 
 h2 {
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-size: clamp(1.3rem, 3vw, 2.4rem);
   font-weight: 400;
 }
 
@@ -113,7 +113,6 @@ h2 {
   align-items: center;
   justify-content: center;
   gap: 4rem;
-  border: 1px solid red;
 }
 
 /* Game Setup Page */
@@ -271,11 +270,10 @@ h2 {
 }
 
 @media (max-width: 910px) {
+  .game-setup-container, 
   .game-play-container {
-    padding: none;
-    border: none;
+    padding: 0;
     flex-direction: column;
-    width: auto;
+    gap: 1rem;
   }
-  
 }

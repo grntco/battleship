@@ -5,5 +5,5 @@ import { DOMController } from "./ui/DOMController";
 document.body.appendChild(createMainContainer());
 
 DOMController.initGameSetup();
-DOMController.initGamePlay();
-DOMController.initGameOver();
+// DOMController.initGamePlay();
+// DOMController.initGameOver();
