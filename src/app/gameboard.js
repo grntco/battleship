@@ -59,22 +59,14 @@ class Gameboard {
     }
 
     getRandomShipCoordinates(length) {
-        const directions = [[0, -1], [1, 0]];
-        let directionIndex = 0;
+        const directions = [[1, 0], [0, -1]];
+        const allCoordinates = this.getRestOfCoordinates(this.getRandomCoordinates(), length, directions[Math.floor(Math.random() * 2)]);
 
-        while (directionIndex === 0) {
-            let start = this.getRandomCoordinates();
-            while (directionIndex < directions.length) {
-                let allCoordinates = this.getRestOfCoordinates(start, length, directions[directionIndex]);
-
-                if (this._arePlaceable(allCoordinates)) {
-                    return allCoordinates;
-                }
-
-                directionIndex++;
-            }
-            directionIndex = 0;
-        }
+        if (!this._arePlaceable(allCoordinates)) {
+            return this.getRandomShipCoordinates(length);
+        } else {
+            return allCoordinates;
+        };
     }
 
     getRestOfCoordinates(start, shipLength, direction) {
@@ -155,6 +147,8 @@ class Gameboard {
     }
 
     _arePlaceable(coordinates) {
+        if (coordinates.length === 0) return false;
+
         return coordinates.every(([x, y]) => {
             return this._isInBounds([x, y]) && !this._hasShip([x, y]);
         }) && this.getAdjacentCoordinates(coordinates).every(([x, y]) => !this._hasShip([x, y]));
