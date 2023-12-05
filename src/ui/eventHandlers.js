@@ -1,13 +1,14 @@
 import { DOMController } from "./DOMController";
 
 export const eventHandlers = {
-    shipFollowCursor: function(e) {
+    // Game Setup Handlers
+    mouseMoveToDragShip: function(e) {
         const ship = document.querySelector('.game-setup__ship-container');
         ship.style.left = e.pageX - 16 + 'px';
         ship.style.top = e.pageY - 16 + 'px';
     },
     
-    rotateBtnClick: function() {
+    clickToRotateShip: function() {
         const shipContainer = document.querySelector('.game-setup__ship-container');
         if (shipContainer.offsetWidth > 32) {
             shipContainer.style.height = shipContainer.offsetWidth + 'px';
@@ -17,12 +18,21 @@ export const eventHandlers = {
             shipContainer.style.height = '32px';
         }
     },
-    
-    enemyGridClick: function(e) {
+
+    clickToPlaceShip: function(e) {
+        DOMController.renderPlacedShipOnBoard(e.target);
+    },
+
+    // randomize
+
+
+    // Game Play Handlers
+    clickToAttackEnemy: function(e) {
         DOMController.displayGamePlayRound(e.target);
     },
-    
-    playAgainBtnClick: function() {
+
+    // Game Over Handlers
+    clickToPlayAgain: function() {
         DOMController.initGameSetup();
     }
 };

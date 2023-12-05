@@ -11,7 +11,7 @@ const DOMController = {
         this.game = new Game();
         this._updatePageContent(createGameSetupContainer());
         this.displayShipSetupContainer();
-        // init setup events
+        eventListeners.initGameSetupEvents();
     },
 
     initGamePlay: function() {
@@ -36,6 +36,7 @@ const DOMController = {
 
     renderPlacedShipOnBoard: function(gridItem) {
         const [x, y] = getCoordinatesOfGridItem(gridItem);
+        console.log([x, y]);
         const shipContainer = document.querySelector('.game-setup__ship-container');
 
         let shipLength = 0;
