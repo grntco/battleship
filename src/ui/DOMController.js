@@ -57,19 +57,13 @@ const DOMController = {
     },
 
     displayShipSetupContainer: function() {
-        const alreadyPlacedShips = this.game.player.gameboard.ships;
-        const shipLengths = [5, 4, 3, 3, 2, 2];
-        const shipContainer = document.querySelector('.game-setup__ship-container');
-
-        for (let i = 0; i < shipLengths.length; i++) {
-            if (i === 7) {
-                // remove ship container and display start btn
-            }
-
-            if (i === alreadyPlacedShips.length) {
-                shipContainer.style.width = shipLengths[i] * 32 + 'px';
-                shipContainer.style.height = '32px';
-            }
+        const shipLength = this.game.player.gameboard.moveToNextShipLength();
+        if (shipLength === 0) {
+            this.initGamePlay();
+        } else {
+            const shipContainer = document.querySelector('.game-setup__ship-container');
+            shipContainer.style.width = shipLength * 32 + 'px';
+            shipContainer.style.height = '32px';
         }
     },
 

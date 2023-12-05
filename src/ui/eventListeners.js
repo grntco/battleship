@@ -3,11 +3,11 @@ import { eventHandlers } from "./eventHandlers";
 export const eventListeners = {
 
     initGameSetupEvents: function() {
-        document.addEventListener('mousemove', eventHandlers.moveMouseToDragShip);
+        const gameSetupContainer = document.querySelector('.game-setup-container');
+        gameSetupContainer.addEventListener('mousemove', eventHandlers.moveMouseToDragShip);
 
         const rotateBtn = document.getElementById('rotate-btn');
         rotateBtn.addEventListener('click', eventHandlers.clickToRotateShip);
-
 
         // const randomizeBtn = document.getElementById('randomize-btn');
 

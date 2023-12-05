@@ -3,9 +3,10 @@ import { Ship } from "./ship";
 class Gameboard {
     constructor() {
         this.graph = this._createGraph();
+        this.shipLengths = [5, 4, 3, 3, 2, 2];
+        this.ships = [];
         this.missedShots = [];
         this.hitShots = [];
-        this.ships = [];
     }
 
     placeShip(...coordinates) {
@@ -132,6 +133,14 @@ class Gameboard {
         return array.some(([a, b]) => [a, b].every((value, index) => 
             value === [x, y][index]
         ));
+    }
+
+    moveToNextShipLength() {
+        if (this.ships.length < this.shipLengths.length) {
+            return this.shipLengths[this.ships.length];
+        } else {
+            return 0;
+        }
     }
 
     _createGraph() {
