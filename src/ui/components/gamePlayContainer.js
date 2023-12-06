@@ -1,6 +1,6 @@
 import { createGrid } from "./grid";
 
-const createGamePlayContainer = function() {
+export const createGamePlayContainer = function() {
     const gamePlayContainer = document.createElement('div');
     gamePlayContainer.className = 'game-play-container';
 
@@ -31,7 +31,6 @@ const createGamePlayContainer = function() {
             return axis;
         };
 
-
         gridContainer.appendChild(createAxis('x'));
         gridContainer.appendChild(createAxis('y'));
         gridContainer.appendChild(createGrid());
@@ -45,6 +44,3 @@ const createGamePlayContainer = function() {
 
     return gamePlayContainer;
 };
-
-export { createGamePlayContainer };
-
