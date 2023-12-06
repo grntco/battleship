@@ -123,14 +123,6 @@ export class Gameboard {
         ));
     }
 
-    moveToNextShipLength() {
-        if (this.ships.length < this.shipLengths.length) {
-            return this.shipLengths[this.ships.length];
-        } else {
-            return 0;
-        }
-    }
-
     _createGraph() {
         const graph = [];
 

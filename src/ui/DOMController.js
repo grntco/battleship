@@ -10,7 +10,7 @@ const DOMController = {
     initGameSetup: function() {
         this.game = new Game();
         this._updatePageContent(createGameSetupContainer());
-        this.displayShipSetupContainer();
+        this.displayNextShipContainerOrInitGamePlay();
         eventListeners.initGameSetupEvents();
     },
 
@@ -58,18 +58,32 @@ const DOMController = {
 
     displayRandomPlacedShipOnBoard: function() {
         const playerGameboard = this.game.player.gameboard;
-        playerGameboard.placeShip(...playerGameboard.getRandomShipCoordinates(playerGameboard.moveToNextShipLength()));
+        playerGameboard.placeShip(...playerGameboard.getRandomShipCoordinates(this._moveToNextShipLength()));
         this._updateBoards();
     },
 
-    displayShipSetupContainer: function() {
-        const shipLength = this.game.player.gameboard.moveToNextShipLength();
+    displayNextShipContainerOrInitGamePlay: function() {
+        const shipLength = this._moveToNextShipLength();
         if (shipLength === 0) {
             this.initGamePlay();
         } else {
-            const shipContainer = document.querySelector('.game-setup__ship-container');
-            shipContainer.style.width = shipLength * 32 + 'px';
-            shipContainer.style.height = '32px';
+            this._displayShipSetupContainer(shipLength);
+        }
+    },
+
+    _displayShipSetupContainer: function(shipLength) {        
+        const shipContainer = document.querySelector('.game-setup__ship-container');
+        shipContainer.style.width = shipLength * 32 + 'px';
+        shipContainer.style.height = '32px';
+    },
+    
+    _moveToNextShipLength: function() {
+        const shipLengths = [5, 4, 3, 3, 2, 2];
+        const alreadyPlacedShips = this.game.player.gameboard.ships;
+        if (alreadyPlacedShips.length < shipLengths.length) {
+            return shipLengths[alreadyPlacedShips.length];
+        } else {
+            return 0;
         }
     },
 

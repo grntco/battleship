@@ -21,12 +21,12 @@ export const eventHandlers = {
 
     clickToPlaceShip: function(e) {
         DOMController.displayManualPlacedShipOnBoard(e.target);
-        DOMController.displayShipSetupContainer();
+        DOMController.displayNextShipContainerOrInitGamePlay();
     },
 
     clickToPlaceRandomShip: function() {
         DOMController.displayRandomPlacedShipOnBoard();
-        DOMController.displayShipSetupContainer();
+        DOMController.displayNextShipContainerOrInitGamePlay();
     },
  
     // Game Play Handlers
