@@ -11,16 +11,12 @@ export class Gameboard {
 
     placeShip(coordinates) {
         if (this._arePlaceable(coordinates)) {
-            const shipLength = coordinates.length;
-            const newShip = new Ship(shipLength);
+            const newShip = new Ship(coordinates.length);
 
             coordinates.forEach(([x, y]) => {
                 const node = this.graph[x][y];
-
-                if (!node.hasShip) {
-                    node.hasShip = true;
-                    newShip.coordinates.push([x, y]);
-                }
+                node.hasShip = true;
+                newShip.coordinates.push([x, y]);
             });
 
             this.ships.push(newShip);
