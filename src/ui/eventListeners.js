@@ -9,8 +9,8 @@ export const eventListeners = {
         const rotateBtn = document.getElementById('rotate-btn');
         rotateBtn.addEventListener('click', eventHandlers.clickToRotateShip);
 
-        const randomizeBtn = document.getElementById('randomize-btn');
-        randomizeBtn.addEventListener('click', eventHandlers.clickToPlaceRandomShip);
+        const randomBtn = document.getElementById('random-btn');
+        randomBtn.addEventListener('click', eventHandlers.clickToPlaceRandomShip);
 
         const playerGridItems = [...document.querySelectorAll('.grid-item')];
         playerGridItems.forEach(gridItem => {

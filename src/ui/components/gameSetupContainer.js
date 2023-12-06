@@ -22,9 +22,9 @@ export const createGameSetupContainer = function() {
             rotateBtn.id = 'rotate-btn';
             rotateBtn.textContent = 'Rotate';
             
-            const randomizeBtn = btnContainer.appendChild(document.createElement('button'));
-            randomizeBtn.id = 'randomize-btn';
-            randomizeBtn.textContent = 'Randomize';
+            const randomBtn = btnContainer.appendChild(document.createElement('button'));
+            randomBtn.id = 'random-btn';
+            randomBtn.textContent = 'Random';
 
         return welcomeContainer;
     };
