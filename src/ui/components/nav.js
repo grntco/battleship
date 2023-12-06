@@ -1,4 +1,4 @@
-const createNav = function() {
+export const createNav = function() {
     const nav = document.createElement('nav');
     nav.className = 'nav';
 
@@ -8,5 +8,3 @@ const createNav = function() {
 
     return nav;
 };
-
-export { createNav };

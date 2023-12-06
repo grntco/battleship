@@ -1,6 +1,6 @@
 import ghIcon from "../assets/images/github-mark.svg";
 
-const createFooter = function() {
+export const createFooter = function() {
     const footer = document.createElement('footer');
     footer.className = 'footer';
 
@@ -10,7 +10,6 @@ const createFooter = function() {
     ghLink.target = '_blank';
 
     const description = ghLink.appendChild(document.createElement('p'));
-    description.className = 'footer__gh-link__description';
     description.textContent = 'Made by grntco';
 
     const icon = ghLink.appendChild(document.createElement('img'));
@@ -19,5 +18,3 @@ const createFooter = function() {
 
     return footer;
 };
-
-export { createFooter };
