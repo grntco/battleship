@@ -6,10 +6,6 @@ export class Game {
         this.computer = new Player('Computer');
     }
 
-    initPlayerTurn() {
-        this.player.turn = true;
-    }
-
     initRandomShips(gameboard) {
         gameboard.shipLengths.forEach(length => {
             gameboard.placeShip(gameboard.getRandomShipCoordinates(length));
@@ -18,21 +14,12 @@ export class Game {
 
     start() {
         this.initRandomShips(this.computer.gameboard);
-        this.initPlayerTurn();
     }
 
     playRound([x, y]) {
         if (!this.computer.gameboard.alreadyPlayed([x, y])) {  
-            if (this.player.turn) {
-                this.playerMove([x, y]);
-            } else {
-                throw new Error('Not your turn yet!');
-            }
-    
-            this.switchTurns();
-            this.computerMove();
-            this.switchTurns();
-    
+            this.playerMove([x, y]);
+            this.computerMove();    
             if (this.hasEnded()) {
                 console.log(this.getGameResult());
             }
@@ -45,16 +32,6 @@ export class Game {
 
     computerMove([x, y] = this.player.gameboard.getRandomCoordinates()) {
         this.computer.attack([x, y], this.player.gameboard);
-    }
-
-    switchTurns() {
-        if(this.player.turn) {
-            this.player.turn = false;
-            this.computer.turn = true;
-        } else {
-            this.player.turn = true;
-            this.computer.turn = false;
-        }
     }
 
     hasEnded() {
