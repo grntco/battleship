@@ -106,15 +106,8 @@ export class Gameboard {
         return adjacentCoordinates;
     }
 
-    _areCoordinatesInArray([x, y], array) {
-        return array.some(([a, b]) => [a, b].every((value, index) => 
-            value === [x, y][index]
-        ));
-    }
-
     _createGraph() {
         const graph = [];
-
         for (let i = 0; i < 10; i++) {
             const row = [];
             for (let j = 0; j < 10; j++) {
@@ -123,21 +116,21 @@ export class Gameboard {
             }
             graph.push(row);
         }
-
         return graph;
+    }
+
+    _areCoordinatesInArray([x, y], array) {
+        return array.some(([a, b]) => [a, b].every((value, index) => 
+            value === [x, y][index]
+        ));
     }
 
     _arePlaceable(coordinates) {
         if (coordinates.length === 0) return false;
 
         return coordinates.every(([x, y]) => {
-            return this._isInBounds([x, y]) && !this._hasShip([x, y]);
-        }) && this.getAdjacentCoordinates(coordinates).every(([x, y]) => !this._hasShip([x, y]));
-    }
-
-    _hasShip([x, y]) {
-        const node = this.graph[x][y];
-        return node.hasShip;
+            return this._isInBounds([x, y]) && !this.graph[x][y].hasShip;
+        }) && this.getAdjacentCoordinates(coordinates).every(([x, y]) => !this.graph[x][y].hasShip);
     }
 
     _isInBounds([x, y]) {
