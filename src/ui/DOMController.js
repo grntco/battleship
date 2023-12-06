@@ -4,7 +4,7 @@ import { getGridItemFromCoordinates } from "../app/helpers/getGridItemFromCoordi
 import { createGamePlayContainer } from "./components/gamePlayContainer";
 import { createGameOverContainer } from "./components/gameOverContainer";
 import { createGameSetupContainer } from "./components/gameSetupContainer";
-import { eventListeners } from "./eventListeners";
+import { eventListeners } from "./events/listeners";
 
 const DOMController = {
     initGameSetup: function() {

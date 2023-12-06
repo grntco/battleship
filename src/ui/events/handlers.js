@@ -1,4 +1,4 @@
-import { DOMController } from "./DOMController";
+import { DOMController } from "../DOMController";
 
 export const eventHandlers = {
     moveMouseToDragShip: function(e) {

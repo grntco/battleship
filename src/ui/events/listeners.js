@@ -1,4 +1,4 @@
-import { eventHandlers } from "./eventHandlers";
+import { eventHandlers } from "./handlers";
 
 export const eventListeners = {
     initGameSetupEvents: function() {
