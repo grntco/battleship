@@ -52,13 +52,13 @@ const DOMController = {
         }
 
         allCoordinates = playerGameboard.getRestOfCoordinates([x, y], shipLength, direction);
-        playerGameboard.placeShip(...allCoordinates);
+        playerGameboard.placeShip(allCoordinates);
         this._updateBoards();
     },
 
     displayRandomPlacedShipOnBoard: function() {
         const playerGameboard = this.game.player.gameboard;
-        playerGameboard.placeShip(...playerGameboard.getRandomShipCoordinates(this._moveToNextShipLength()));
+        playerGameboard.placeShip(playerGameboard.getRandomShipCoordinates(this._moveToNextShipLength()));
         this._updateBoards();
     },
 

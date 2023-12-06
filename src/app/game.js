@@ -12,7 +12,7 @@ export class Game {
 
     initRandomShips(gameboard) {
         gameboard.shipLengths.forEach(length => {
-            gameboard.placeShip(...gameboard.getRandomShipCoordinates(length));
+            gameboard.placeShip(gameboard.getRandomShipCoordinates(length));
         });
     }
 

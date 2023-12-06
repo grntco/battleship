@@ -3,13 +3,13 @@ import { Ship } from "./ship";
 export class Gameboard {
     constructor() {
         this.graph = this._createGraph();
-        this.shipLengths = [5, 4, 3, 3, 2, 2];
         this.ships = [];
+        this.shipLengths = [5, 4, 3, 3, 2, 2];
         this.missedShots = [];
         this.hitShots = [];
     }
 
-    placeShip(...coordinates) {
+    placeShip(coordinates) {
         if (this._arePlaceable(coordinates)) {
             const shipLength = coordinates.length;
             const newShip = new Ship(shipLength);
@@ -22,11 +22,9 @@ export class Gameboard {
                     newShip.coordinates.push([x, y]);
                 }
             });
+
             this.ships.push(newShip);
-        } else {
-            console.log('unable to place');
-            // throw new Error('Please provide accurate coordinates.');
-        }        
+        }  
     }
 
     receiveAttack([x, y]) {
