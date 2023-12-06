@@ -1,7 +1,6 @@
 import { DOMController } from "./DOMController";
 
 export const eventHandlers = {
-    // Game Setup Handlers
     moveMouseToDragShip: function(e) {
         const ship = document.querySelector('.game-setup__ship-container');
         ship.style.left = e.pageX - 16 + 'px';
@@ -29,12 +28,10 @@ export const eventHandlers = {
         DOMController.displayNextShipContainerOrInitGamePlay();
     },
  
-    // Game Play Handlers
     clickToAttackEnemy: function(e) {
         DOMController.displayGamePlayRound(e.target);
     },
 
-    // Game Over Handlers
     clickToPlayAgain: function() {
         DOMController.initGameSetup();
     }

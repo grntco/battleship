@@ -1,7 +1,6 @@
 import { eventHandlers } from "./eventHandlers";
 
 export const eventListeners = {
-
     initGameSetupEvents: function() {
         const gameSetupContainer = document.querySelector('.game-setup-container');
         gameSetupContainer.addEventListener('mousemove', eventHandlers.moveMouseToDragShip);
