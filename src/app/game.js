@@ -39,11 +39,6 @@ export class Game {
         }
     }
 
-    isAHit([x, y], gameboard) {
-        const node = gameboard.graph[x][y];
-        return node.hasShip && node.isShot;
-    }
-
     playerMove([x, y]) {
         this.player.attack([x, y], this.computer.gameboard);
     }

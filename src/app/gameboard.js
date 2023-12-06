@@ -25,13 +25,13 @@ export class Gameboard {
 
     receiveAttack([x, y]) {
         const node = this.graph[x][y];
-        node.isShot = true;
-        if (!node.hasShip) {
-            this.missedShots.push([x, y]);
-        } else {
+
+        if (node.hasShip) {
             const targetShip = this._getShipFromCoordinates([x, y]);
             targetShip.hit();
             this.hitShots.push([x, y]);
+        } else {
+            this.missedShots.push([x, y]);
         }
     }
 
@@ -39,17 +39,18 @@ export class Gameboard {
         return this.ships.every(ship => ship.isSunk());       
     }
 
+    alreadyPlayed([x, y]) {
+        return this._areCoordinatesInArray([x, y], this.missedShots) || this._areCoordinatesInArray([x, y], this.hitShots);
+    }
+
     getRandomCoordinates() {
         let x = Math.floor(Math.random() * 10);
         let y = Math.floor(Math.random() * 10);
         if (this.alreadyPlayed([x, y])) {
             return this.getRandomCoordinates();
+        } else {
+            return [x, y];
         }
-        return [x, y];
-    }
-
-    alreadyPlayed([x, y]) {
-        return this.areCoordinatesInArray([x, y], this.missedShots) || this.areCoordinatesInArray([x, y], this.hitShots);
     }
 
     getRandomShipCoordinates(length) {
@@ -75,43 +76,37 @@ export class Gameboard {
         return allCoordinates;
     }
 
-    getAdjacentCoordinates(shipCoordinates) {
-        const start = shipCoordinates[0];
-        const end = shipCoordinates[shipCoordinates.length - 1];
+    getAdjacentCoordinates(coordinates) {
+        const start = coordinates[0];
+        const end = coordinates[coordinates.length - 1];
         
         let adjacentCoordinates = [];
+        let offsets = [[[-1, 0], [1, 0]], [[0, 1], [0, -1]]];
+        let offsetEnds = [];
+        let offsetSides = [];
 
-        if (start[1] === end[1]) { // if coordinates are horizontal
-            const before = [start[0] - 1, start[1]];
-            const after = [end[0] + 1, end[1]];
-
-            adjacentCoordinates.push(before, after);
-
-            shipCoordinates.forEach(([x, y]) => {
-                const adjacentTop = [x, y + 1];
-                const adjacentBottom = [x, y - 1];
-
-                adjacentCoordinates.push(adjacentTop, adjacentBottom);
-            });
-        } else if (start[0] === end[0]) { // if coordinates are vertical
-            // may need to switch back, and just reverse the allcoordinates on the shipplacement
-            const before = [end[0], end[1] - 1];
-            const after = [start[0], start[1] + 1];
-
-            adjacentCoordinates.push(before, after);
-
-            shipCoordinates.forEach(([x, y]) => {
-                const adjacentLeft = [x - 1, y];
-                const adjacentRight = [x + 1, y];
-
-                adjacentCoordinates.push(adjacentLeft, adjacentRight);
-            });
+        if (start[1] === end[1]) {
+            offsetEnds = offsets[0];
+            offsetSides = offsets[1];
+        } else {
+            offsetEnds = offsets[1];
+            offsetSides = offsets[0];
         }
+
+        const before = [start[0] + offsetEnds[0][0], start[1] + offsetEnds[0][1]];
+        const after = [end[0] + offsetEnds[1][0], end[1] + offsetEnds[1][1]];
+        adjacentCoordinates.push(before, after);
+
+        coordinates.forEach(([x, y]) => {
+            const sides = [[x + offsetSides[0][0], y + offsetSides[0][1]], [x + offsetSides[1][0], y + offsetSides[1][1]]];
+            adjacentCoordinates.push(...sides);
+        });  
+        
         adjacentCoordinates = adjacentCoordinates.filter(([x, y]) => this._isInBounds([x, y]));
         return adjacentCoordinates;
     }
 
-    areCoordinatesInArray([x, y], array) {
+    _areCoordinatesInArray([x, y], array) {
         return array.some(([a, b]) => [a, b].every((value, index) => 
             value === [x, y][index]
         ));
@@ -123,7 +118,7 @@ export class Gameboard {
         for (let i = 0; i < 10; i++) {
             const row = [];
             for (let j = 0; j < 10; j++) {
-                const node = { hasShip: false, isShot: false };
+                const node = { hasShip: false };
                 row.push(node);
             }
             graph.push(row);
@@ -151,7 +146,7 @@ export class Gameboard {
 
     _getShipFromCoordinates([x, y]) {
         return this.ships.find(ship => 
-            this.areCoordinatesInArray([x, y], ship.coordinates)
+            this._areCoordinatesInArray([x, y], ship.coordinates)
         );
     }
 }
