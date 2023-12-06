@@ -1,15 +1,14 @@
-export const createGameOverContainer = function(result) {
+export const createGameOverContainer = function(gameResult) {
     const gameOverContainer = document.createElement('div');
     gameOverContainer.className = 'game-over-container';
 
-    const gameResult = gameOverContainer.appendChild(document.createElement('h2'));
-    gameResult.className = 'game-over__game-result';
-    gameResult.textContent = result;
+    const gameResultText = gameOverContainer.appendChild(document.createElement('h2'));
+    gameResultText.className = 'game-over__game-result-text';
+    gameResultText.textContent = gameResult;
 
     const playAgainBtn = gameOverContainer.appendChild(document.createElement('button'));
-    playAgainBtn.className = 'game-over__play-again-btn';
     playAgainBtn.id = 'play-again-btn';
-    playAgainBtn.textContent = 'Play Again?';
+    playAgainBtn.textContent = 'Play Again';
 
     return gameOverContainer;
 };

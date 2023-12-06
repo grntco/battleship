@@ -71,7 +71,7 @@ const DOMController = {
         }
     },
 
-    _displayShipSetupContainer: function(shipLength) {        
+    _displayShipSetupContainer: function(shipLength) {   
         const shipContainer = document.querySelector('.game-setup__ship-container');
         shipContainer.style.width = shipLength * 32 + 'px';
         shipContainer.style.height = '32px';

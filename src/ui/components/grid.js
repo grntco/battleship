@@ -1,4 +1,4 @@
-function createGrid() {
+export function createGrid() {
     const grid = document.createElement('div');
     grid.className = 'grid';
 
@@ -11,5 +11,3 @@ function createGrid() {
 
     return grid;
 }
-
-export { createGrid };
