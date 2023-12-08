@@ -1,14 +1,14 @@
 import { Player } from "../app/player";
 import { Gameboard } from "../app/gameboard";
 
-describe.skip('Player', () => {
+describe('Player', () => {
     const playerOne = new Player();
 
-    it('Player class has a property of turn, default to false', () => {
-        expect(playerOne.turn).toBeFalsy();
+    it('Player constructor creates a new gameboard', () => {
+        expect(playerOne.gameboard).toHaveProperty('graph');
+        expect(playerOne.gameboard).toHaveProperty('ships');
     });
 
-    // maybe...
     it('attack() attacks an enemy gameboard', () => {
         const enemyGameboard = new Gameboard();
         playerOne.attack([0, 0], enemyGameboard);

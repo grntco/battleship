@@ -78,7 +78,7 @@ const DOMController = {
     },
     
     _moveToNextShipLength: function() {
-        const shipLengths = [5, 4, 3, 3, 2, 2];
+        const shipLengths = this.game.player.gameboard.shipLengths;
         const alreadyPlacedShips = this.game.player.gameboard.ships;
         if (alreadyPlacedShips.length < shipLengths.length) {
             return shipLengths[alreadyPlacedShips.length];

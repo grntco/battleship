@@ -1,6 +1,6 @@
 import { Ship } from "../app/ship";
 
-describe.skip('Ship properties and methods', () => {
+describe('Ship', () => {
     const testShip = new Ship(4);
 
     it('New ship has length of given parameter', () => {
@@ -11,20 +11,19 @@ describe.skip('Ship properties and methods', () => {
         expect(testShip.hitCount).toBe(0);
     });
 
-
     it('Ship.hit() increments Ship.hitCount by 1', () => {
         testShip.hit();
         expect(testShip.hitCount).toBe(1);
     });
 
-    it('Ship is not yet sunk', () => {
+    it('Ship of length 4 is not yet sunk after 3 hits', () => {
         testShip.hit();
         testShip.hit();
         expect(testShip.isSunk()).toBe(false);
 
     });
 
-    it('Ship is sunk', () => {
+    it('Ship of length 4 is sunk after 4 hits', () => {
         testShip.hit();
         expect(testShip.isSunk()).toBe(true);
     });
