@@ -1,6 +1,4 @@
 import { Game } from "../app/game";
-import { getCoordinatesOfGridItem } from "../app/helpers/getCoordinatesOfGridItem";
-import { getGridItemFromCoordinates } from "../app/helpers/getGridItemFromCoordinates";
 import { createGamePlayContainer } from "./components/gamePlayContainer";
 import { createGameOverContainer } from "./components/gameOverContainer";
 import { createGameSetupContainer } from "./components/gameSetupContainer";
@@ -28,14 +26,14 @@ const DOMController = {
     },
 
     displayGamePlayRound: function(gridItem) {
-        const [x, y] = getCoordinatesOfGridItem(gridItem);
+        const [x, y] = this._getCoordinatesOfGridItem(gridItem);
         this.game.playRound([x, y]);
         this._updateBoards();
         if (this.game.hasEnded()) this.initGameOver();
     },
 
     displayManualPlacedShipOnBoard: function(gridItem) {
-        const [x, y] = getCoordinatesOfGridItem(gridItem);
+        const [x, y] = this._getCoordinatesOfGridItem(gridItem);
         const shipContainer = document.querySelector('.game-setup__ship-container');
         const playerGameboard = this.game.player.gameboard;
 
@@ -99,21 +97,21 @@ const DOMController = {
 
         gameboards[0].ships.forEach(ship => {
             ship.coordinates.forEach(([x, y]) => {
-                const gridItem = getGridItemFromCoordinates([x, y], grids[0]);
+                const gridItem = this._getGridItemFromCoordinates([x, y], grids[0]);
                 gridItem.classList.add('grid-item__ship');
             });
         });
 
         for (let i = 0; i < grids.length; i++) {
             gameboards[i].hitShots.forEach(([x, y]) => {
-                const gridItem = getGridItemFromCoordinates([x, y], grids[i]);
+                const gridItem = this._getGridItemFromCoordinates([x, y], grids[i]);
                 if (!gridItem.classList.contains('grid-item__hit')) {
                     gridItem.classList.add('grid-item__hit');
                 }
             });
 
             gameboards[i].missedShots.forEach(([x, y]) => {
-                const gridItem = getGridItemFromCoordinates([x, y], grids[i]);
+                const gridItem = this._getGridItemFromCoordinates([x, y], grids[i]);
                 if (!gridItem.classList.contains('grid-item__miss')) {
                     gridItem.classList.add('grid-item__miss');
                 }
@@ -126,6 +124,33 @@ const DOMController = {
         titles[0].textContent = 'You';
         titles[1].textContent = 'Enemy';
     },
+
+    _getCoordinatesOfGridItem(gridItem) {
+        const allGridItems = [...gridItem.parentElement.children]; 
+        const gridItemIndex = allGridItems.indexOf(gridItem);
+    
+        let numberOfSquaresBefore = allGridItems.slice(0, gridItemIndex).length;
+        let iterations = 0;
+    
+        while (numberOfSquaresBefore >= 10) {
+            numberOfSquaresBefore -= 10;
+            iterations++;
+        }
+    
+        const x = numberOfSquaresBefore;
+        const y = 9 - iterations;
+    
+        return [x, y];
+    },
+
+    _getGridItemFromCoordinates([x, y], grid) {
+        const allGridItems = [...grid.querySelectorAll('.grid-item')];
+        const numberOfSquaresBefore = x + ((9 - y) * 10);
+        
+        const targetGridItem = allGridItems.find(gridItem => allGridItems.indexOf(gridItem) === numberOfSquaresBefore);
+    
+        return targetGridItem;
+    }
 };
 
 export { DOMController };
