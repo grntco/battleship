@@ -8,6 +8,7 @@
     "watch": "webpack --watch",
     "start": "webpack serve --open",
     "build": "webpack",
+    "deploy-demo": "git subtree push --prefix dist origin gh-pages",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
@@ -21,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/grntco/battleship/issues"
   },
-  "homepage": "https://github.com/grntco/battleship#readme",
+  "homepage": "https://github.com/grntco/battleship",
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
